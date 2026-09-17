@@ -39,6 +39,7 @@
 
   SALLA THEME-SETTINGS MAPPING — DESIGN-TIME ANNOTATION ONLY. NO TWILIGHT CODE.
 -->
+  <link rel="stylesheet" href="assets/e2e.css">
 </head>
 
 <body data-page="home">
@@ -67,22 +68,22 @@
     </nav>
 
     <div class="hdr__actions">
-      <a class="hdr__act" href="#top" aria-label="البحث">
+      <a class="hdr__act" href="search.html" aria-label="البحث">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="10.2" cy="10.2" r="6.8"/><path d="M15.05 15.05 20.3 20.3"/>
         </svg>
       </a>
-      <a class="hdr__act" href="#top" aria-label="المفضلة">
+      <a class="hdr__act" href="favorites.html" aria-label="المفضلة">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 19.9c-1.1-.75-6.9-4.35-6.9-8.85a3.75 3.75 0 0 1 6.9-2.05 3.75 3.75 0 0 1 6.9 2.05c0 4.5-5.8 8.1-6.9 8.85Z"/>
         </svg>
       </a>
-      <a class="hdr__act" href="#top" aria-label="السلة — ٣ منتجات">
+      <a class="hdr__act" href="cart.html" aria-label="السلة">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5.7 8.1h12.6l-1 11.15a1.6 1.6 0 0 1-1.6 1.45H8.3a1.6 1.6 0 0 1-1.6-1.45Z"/>
           <path d="M9.2 8.1V6.55a2.8 2.8 0 0 1 5.6 0V8.1"/>
         </svg>
-        <span class="hdr__badge" aria-hidden="true">٣</span>
+        <span class="hdr__badge" data-cart-badge aria-hidden="true">٠</span>
       </a>
     </div>
   </div>
@@ -142,13 +143,13 @@
       </div>
       <div class="card__body">
         <span class="card__attr card__attr--ar">أساسي أسبوعي</span>
-        <h3 class="card__name">زبدة فول سوداني بالتمر</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=peanut">زبدة فول سوداني بالتمر</a></h3>
         <div class="card__meta">
           <span class="card__price mono">58</span>
           <span class="card__cur">ر.س</span>
           <span class="card__weight">٣٥٠غ</span>
         </div>
-        <a class="card__act card__act--buy" href="#week">أضيفي للسلة</a>
+        <button class="card__act card__act--buy e2e-add" type="button" data-add="peanut">أضيفي للسلة</button>
       </div>
     </article>
 
@@ -162,13 +163,13 @@
       </div>
       <div class="card__body">
         <span class="card__attr"></span>
-        <h3 class="card__name">زيت فلفل حار</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=chili">زيت فلفل حار</a></h3>
         <div class="card__meta">
           <span class="card__price mono">78</span>
           <span class="card__cur">ر.س</span>
           <span class="card__weight">٢٠٠مل</span>
         </div>
-        <a class="card__act card__act--buy" href="#week">أضيفي للسلة<span class="card__left">باقي ٢</span></a>
+        <button class="card__act card__act--buy e2e-add" type="button" data-add="chili">أضيفي للسلة <span class="card__left">باقي ٢</span></button>
       </div>
     </article>
 
@@ -198,13 +199,13 @@
       </div>
       <div class="card__body">
         <span class="card__attr card__attr--ar">أساسي أسبوعي</span>
-        <h3 class="card__name">زبدة فستق خفيفة التحميص</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=pistachio">زبدة فستق خفيفة التحميص</a></h3>
         <div class="card__meta">
           <span class="card__price mono">78</span>
           <span class="card__cur">ر.س</span>
           <span class="card__weight">٢٥٠غ</span>
         </div>
-        <a class="card__act card__act--buy" href="#week">أضيفي للسلة</a>
+        <button class="card__act card__act--buy e2e-add" type="button" data-add="pistachio">أضيفي للسلة</button>
       </div>
     </article>
 
@@ -224,13 +225,13 @@
       </div>
       <div class="card__body">
         <span class="card__attr"></span>
-        <h3 class="card__name">كونفي طماطم</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=tomato">كونفي طماطم</a></h3>
         <div class="card__meta">
           <span class="card__price mono">64</span>
           <span class="card__cur">ر.س</span>
           <span class="card__weight">٣٠٠غ</span>
         </div>
-        <a class="card__act card__act--wait" href="#week">علّميني إذا توفر</a>
+        <a class="card__act card__act--wait" href="product.html?p=tomato">علّميني إذا توفر</a>
       </div>
     </article>
 
@@ -614,8 +615,8 @@
             <span class="bundle__note" data-salla-setting="bundle_price_note">٣ برطمانات · صندوق واحد</span>
           </div>
           <div class="bundle__ctas">
-            <a class="btn btn--primary" href="#bundles" data-salla-setting="bundle_cta_primary">أضيفي الباقة</a>
-            <a class="btn btn--secondary" href="#bundles" data-salla-setting="bundle_cta_secondary">تفاصيل الباقة</a>
+            <a class="btn btn--primary e2e-add" href="cart.html" data-add="breakfast-bundle" data-salla-setting="bundle_cta_primary">أضيفي الباقة</a>
+            <a class="btn btn--secondary" href="product.html?p=breakfast-bundle" data-salla-setting="bundle_cta_secondary">تفاصيل الباقة</a>
           </div>
         </div>
       </li>
@@ -631,7 +632,7 @@
           <h3 class="bundle__name" data-salla-setting="bundle_concept_name">باقة المعلمات</h3>
           <!-- STATED ONCE, IN FULL, AND INHERITED BY THE THREE ENTRIES BELOW. -->
           <p class="bundle__pending" data-salla-setting="bundle_concept_state">اسم ومفهوم من زاد. محتويات هذه الباقة وسعرها لم تُحدَّد بعد، ولم نفترض أيًّا منهما هنا. الصورة توضيحية فقط وليست محتوى الباقة.</p>
-          <a class="btn btn--quiet" href="#bundles" data-salla-setting="bundle_concept_action">سجّلي اهتمامك</a>
+          <a class="btn btn--quiet" href="interest.html?item=باقة هدية" data-salla-setting="bundle_concept_action">سجّلي اهتمامك</a>
         </div>
       </li>
 
@@ -644,7 +645,7 @@
         <div class="bundle__cx">
           <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
           <h3 class="bundle__name" data-salla-setting="bundle_concept_name">باقة البيت</h3>
-          <a class="btn btn--quiet" href="#bundles" data-salla-setting="bundle_concept_action">سجّلي اهتمامك</a>
+          <a class="btn btn--quiet" href="interest.html?item=باقة هدية" data-salla-setting="bundle_concept_action">سجّلي اهتمامك</a>
         </div>
       </li>
 
@@ -657,7 +658,7 @@
         <div class="bundle__cx">
           <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
           <h3 class="bundle__name" data-salla-setting="bundle_concept_name">باقة الأسبوع</h3>
-          <a class="btn btn--quiet" href="#bundles" data-salla-setting="bundle_concept_action">سجّلي اهتمامك</a>
+          <a class="btn btn--quiet" href="interest.html?item=باقة هدية" data-salla-setting="bundle_concept_action">سجّلي اهتمامك</a>
         </div>
       </li>
 
@@ -670,7 +671,7 @@
         <div class="bundle__cx">
           <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
           <h3 class="bundle__name" data-salla-setting="bundle_concept_name">باقة هدية</h3>
-          <a class="btn btn--quiet" href="#bundles" data-salla-setting="bundle_concept_action">سجّلي اهتمامك</a>
+          <a class="btn btn--quiet" href="interest.html?item=باقة هدية" data-salla-setting="bundle_concept_action">سجّلي اهتمامك</a>
         </div>
       </li>
 
@@ -728,16 +729,16 @@
           <span class="ftr__h">زاد</span>
           <a href="story.html">حكايتنا</a>
           <a href="story.html">المطبخ</a>
-          <a href="#top">الأسئلة</a>
-          <a href="#top">تواصلي معنا</a>
+          <a href="help.html#faq">الأسئلة</a>
+          <a href="help.html#contact">تواصلي معنا</a>
         </div>
         <div class="ftr__col">
           <span class="ftr__k mono">ORDERS</span>
           <span class="ftr__h">المساعدة</span>
-          <a href="#top">التوصيل</a>
-          <a href="#top">التحضير</a>
-          <a href="#top">الاستبدال</a>
-          <a href="#top">الخصوصية</a>
+          <a href="help.html#delivery">التوصيل</a>
+          <a href="help.html#prep">التحضير</a>
+          <a href="help.html#returns">الاستبدال</a>
+          <a href="help.html#privacy">الخصوصية</a>
         </div>
       </div>
     </div>
@@ -811,5 +812,6 @@
 })();
 </script>
 
+<script src="assets/e2e.js"></script>
 </body>
 </html>

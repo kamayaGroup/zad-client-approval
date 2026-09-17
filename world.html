@@ -37,6 +37,7 @@
   44x44 targets, sold-out .35/.88, the kitchen teaser and the seasonal editorial
   block are all preserved.
 -->
+  <link rel="stylesheet" href="assets/e2e.css">
 </head>
 
 <body data-page="world">
@@ -63,22 +64,22 @@
     </nav>
 
     <div class="hdr__actions">
-      <a class="hdr__act" href="#top" aria-label="البحث">
+      <a class="hdr__act" href="search.html" aria-label="البحث">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="10.2" cy="10.2" r="6.8"/><path d="M15.05 15.05 20.3 20.3"/>
         </svg>
       </a>
-      <a class="hdr__act" href="#top" aria-label="المفضلة">
+      <a class="hdr__act" href="favorites.html" aria-label="المفضلة">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 19.9c-1.1-.75-6.9-4.35-6.9-8.85a3.75 3.75 0 0 1 6.9-2.05 3.75 3.75 0 0 1 6.9 2.05c0 4.5-5.8 8.1-6.9 8.85Z"/>
         </svg>
       </a>
-      <a class="hdr__act" href="#top" aria-label="السلة — ٣ منتجات">
+      <a class="hdr__act" href="cart.html" aria-label="السلة">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5.7 8.1h12.6l-1 11.15a1.6 1.6 0 0 1-1.6 1.45H8.3a1.6 1.6 0 0 1-1.6-1.45Z"/>
           <path d="M9.2 8.1V6.55a2.8 2.8 0 0 1 5.6 0V8.1"/>
         </svg>
-        <span class="hdr__badge" aria-hidden="true">٣</span>
+        <span class="hdr__badge" data-cart-badge aria-hidden="true">٠</span>
       </a>
     </div>
   </div>
@@ -142,7 +143,7 @@
       </div>
       <div class="card__body">
         <span class="card__attr card__attr--ar">أساسي أسبوعي</span>
-        <h3 class="card__name">زبدة فول سوداني بالتمر</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=peanut">زبدة فول سوداني بالتمر</a></h3>
         <div class="card__meta">
           <span class="card__price mono">58</span><span class="card__cur">ر.س</span><span class="card__weight">٣٥٠غ</span>
         </div>
@@ -160,7 +161,7 @@
       </div>
       <div class="card__body">
         <span class="card__attr card__attr--ar">أساسي أسبوعي</span>
-        <h3 class="card__name">زبدة فستق خفيفة التحميص</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=pistachio">زبدة فستق خفيفة التحميص</a></h3>
         <div class="card__meta">
           <span class="card__price mono">78</span><span class="card__cur">ر.س</span><span class="card__weight">٢٥٠غ</span>
         </div>
@@ -173,7 +174,7 @@
         <span class="card__pending">لا توجد صورة</span>
       </div>
       <div class="card__body">
-        <h3 class="card__name">زبدة لوز</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=almond">زبدة لوز</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: متوفر</span>
         <a class="card__act card__act--wait" href="#cat-butters" aria-label="سجّلي رغبتك في زبدة لوز">سجّلي رغبتك</a>
@@ -185,7 +186,7 @@
         <span class="card__pending">لا توجد صورة</span>
       </div>
       <div class="card__body">
-        <h3 class="card__name">زبدة كاجو</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=cashew">زبدة كاجو</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: متوفر</span>
         <a class="card__act card__act--wait" href="#cat-butters" aria-label="سجّلي رغبتك في زبدة كاجو">سجّلي رغبتك</a>
@@ -215,11 +216,11 @@
       </div>
       <div class="card__body">
         <span class="card__attr"></span>
-        <h3 class="card__name">زيت فلفل حار</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=chili">زيت فلفل حار</a></h3>
         <div class="card__meta">
           <span class="card__price mono">78</span><span class="card__cur">ر.س</span><span class="card__weight">٢٠٠مل</span>
         </div>
-        <a class="card__act card__act--buy" href="#cat-oils">أضيفي للسلة<span class="card__left">باقي ٢</span></a>
+        <button class="card__act card__act--buy e2e-add" type="button" data-add="chili">أضيفي للسلة <span class="card__left">باقي ٢</span></button>
       </div>
     </article>
 
@@ -228,7 +229,7 @@
         <span class="card__pending">لا توجد صورة</span>
       </div>
       <div class="card__body">
-        <h3 class="card__name">شطة مخمّرة</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=fermented-chili">شطة مخمّرة</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: باقي ٢</span>
         <a class="card__act card__act--wait" href="#cat-oils" aria-label="سجّلي رغبتك في شطة مخمّرة">سجّلي رغبتك</a>
@@ -240,7 +241,7 @@
         <span class="card__pending">لا توجد صورة</span>
       </div>
       <div class="card__body">
-        <h3 class="card__name">زيت أعشاب</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=herb-oil">زيت أعشاب</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: باقي ٢</span>
         <a class="card__act card__act--wait" href="#cat-oils" aria-label="سجّلي رغبتك في زيت أعشاب">سجّلي رغبتك</a>
@@ -271,11 +272,11 @@
       </div>
       <div class="card__body">
         <span class="card__attr"></span>
-        <h3 class="card__name">كونفي طماطم</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=tomato">كونفي طماطم</a></h3>
         <div class="card__meta">
           <span class="card__price mono">64</span><span class="card__cur">ر.س</span><span class="card__weight">٣٠٠غ</span>
         </div>
-        <a class="card__act card__act--wait" href="#cat-pantry">علّميني إذا توفر</a>
+        <a class="card__act card__act--wait" href="product.html?p=broth">عرض التفاصيل</a>
       </div>
     </article>
 
@@ -285,7 +286,7 @@
         <img src="_source/photos/jars-tower.jpeg" width="1066" height="1600" alt="برطمان كونفي الثوم من زاد على الرف">
       </div>
       <div class="card__body">
-        <h3 class="card__name">كونفي ثوم</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=garlic-confit">كونفي ثوم</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: نفدت</span>
         <a class="card__act card__act--wait" href="#cat-pantry" aria-label="سجّلي رغبتك في كونفي ثوم">سجّلي رغبتك</a>
@@ -297,7 +298,7 @@
         <span class="card__pending">لا توجد صورة</span>
       </div>
       <div class="card__body">
-        <h3 class="card__name">معجون فلفل مشوي</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=pepper-paste">معجون فلفل مشوي</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: نفدت</span>
         <a class="card__act card__act--wait" href="#cat-pantry" aria-label="سجّلي رغبتك في معجون فلفل مشوي">سجّلي رغبتك</a>
@@ -309,7 +310,7 @@
         <span class="card__pending">لا توجد صورة</span>
       </div>
       <div class="card__body">
-        <h3 class="card__name">جرانولا الشوفان والعسل</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=granola">جرانولا الشوفان والعسل</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين · مذكورة ضمن باقة الفطور</p>
         <span class="derived">حالة العائلة: نفدت</span>
         <a class="card__act card__act--wait" href="#cat-pantry" aria-label="سجّلي رغبتك في جرانولا الشوفان والعسل">سجّلي رغبتك</a>
@@ -335,7 +336,7 @@
     <article class="card card--named">
       <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
       <div class="card__body">
-        <h3 class="card__name">مخلل خيار</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=pickle-cucumber">مخلل خيار</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: ليس في الدفعة</span>
         <a class="card__act card__act--wait" href="#cat-pickles" aria-label="سجّلي رغبتك في مخلل خيار">سجّلي رغبتك</a>
@@ -345,7 +346,7 @@
     <article class="card card--named">
       <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
       <div class="card__body">
-        <h3 class="card__name">مخلل لفت</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=pickle-turnip">مخلل لفت</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: ليس في الدفعة</span>
         <a class="card__act card__act--wait" href="#cat-pickles" aria-label="سجّلي رغبتك في مخلل لفت">سجّلي رغبتك</a>
@@ -355,7 +356,7 @@
     <article class="card card--named">
       <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
       <div class="card__body">
-        <h3 class="card__name">مخلل ليمون</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=pickle-lemon">مخلل ليمون</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: ليس في الدفعة</span>
         <a class="card__act card__act--wait" href="#cat-pickles" aria-label="سجّلي رغبتك في مخلل ليمون">سجّلي رغبتك</a>
@@ -383,7 +384,7 @@
         <img src="_source/photos/compote-spoon.jpeg" width="1066" height="1600" alt="ملعقة ترفع ثمرة محفوظة في القطر من وعاء">
       </div>
       <div class="card__body">
-        <h3 class="card__name">مربّى التين</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=fig-jam">مربّى التين</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين · صورة تحريرية</p>
         <span class="derived">حالة العائلة: موسمي</span>
         <a class="card__act card__act--wait" href="#cat-seasonal" aria-label="علّميني عند موسم مربّى التين">علّميني عند الموسم</a>
@@ -393,7 +394,7 @@
     <article class="card card--named">
       <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
       <div class="card__body">
-        <h3 class="card__name">دبس الرمان</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=pomegranate">دبس الرمان</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: موسمي</span>
         <a class="card__act card__act--wait" href="#cat-seasonal" aria-label="علّميني عند موسم دبس الرمان">علّميني عند الموسم</a>
@@ -403,7 +404,7 @@
     <article class="card card--named">
       <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
       <div class="card__body">
-        <h3 class="card__name">تمر محشو</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=stuffed-dates">تمر محشو</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة العائلة: موسمي</span>
         <a class="card__act card__act--wait" href="#cat-seasonal" aria-label="علّميني عند موسم تمر محشو">علّميني عند الموسم</a>
@@ -429,10 +430,10 @@
     <article class="card card--named">
       <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
       <div class="card__body">
-        <h3 class="card__name">مرق عظام</h3>
+        <h3 class="card__name"><a class="e2e-product-link" href="product.html?p=broth">مرق عظام</a></h3>
         <p class="card__unknown">السعر والوزن غير معروفين</p>
         <span class="derived">حالة الفئة: على الطلب · ٤٨س</span>
-        <a class="card__act card__act--wait" href="#cat-broth">اطلبيه بالتحضير</a>
+        <a class="card__act card__act--wait" href="product.html?p=broth">عرض التفاصيل</a>
       </div>
     </article>
 
@@ -491,7 +492,7 @@
         <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
         <h3 class="bundle__name">باقة المعلمات</h3>
         <p class="bundle__pending">اسم ومفهوم من زاد. محتويات هذه الباقة وسعرها لم تُحدَّد بعد، ولم نفترض أيًّا منهما هنا. الصورة توضيحية فقط.</p>
-        <a class="btn btn--quiet" href="#cat-bundles" aria-label="سجّلي اهتمامك بباقة المعلمات">سجّلي اهتمامك</a>
+        <a class="btn btn--quiet" href="interest.html?item=باقة هدية" aria-label="سجّلي اهتمامك بباقة المعلمات">سجّلي اهتمامك</a>
       </div>
     </li>
 
@@ -503,7 +504,7 @@
       <div class="bundle__cx">
         <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
         <h3 class="bundle__name">باقة البيت</h3>
-        <a class="btn btn--quiet" href="#cat-bundles" aria-label="سجّلي اهتمامك بباقة البيت">سجّلي اهتمامك</a>
+        <a class="btn btn--quiet" href="interest.html?item=باقة هدية" aria-label="سجّلي اهتمامك بباقة البيت">سجّلي اهتمامك</a>
       </div>
     </li>
 
@@ -515,7 +516,7 @@
       <div class="bundle__cx">
         <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
         <h3 class="bundle__name">باقة الأسبوع</h3>
-        <a class="btn btn--quiet" href="#cat-bundles" aria-label="سجّلي اهتمامك بباقة الأسبوع">سجّلي اهتمامك</a>
+        <a class="btn btn--quiet" href="interest.html?item=باقة هدية" aria-label="سجّلي اهتمامك بباقة الأسبوع">سجّلي اهتمامك</a>
       </div>
     </li>
 
@@ -527,7 +528,7 @@
       <div class="bundle__cx">
         <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
         <h3 class="bundle__name">باقة هدية</h3>
-        <a class="btn btn--quiet" href="#cat-bundles" aria-label="سجّلي اهتمامك بباقة هدية">سجّلي اهتمامك</a>
+        <a class="btn btn--quiet" href="interest.html?item=باقة هدية" aria-label="سجّلي اهتمامك بباقة هدية">سجّلي اهتمامك</a>
       </div>
     </li>
 
@@ -658,5 +659,6 @@
 })();
 </script>
 
+<script src="assets/e2e.js"></script>
 </body>
 </html>
