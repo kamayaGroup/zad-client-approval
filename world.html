@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كل عالم زاد — زاد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/zad.css">
+
+<!--
+  ZAD — DESTINATION PAGE: كل عالم زاد — THE COMPLETE CATEGORIZED CATALOG.
+  Tier-2 Internal / Founder Review Artifact. Not client-facing. Records no approval.
+  Revision 10.1.
+
+  7 categories, 23 entries: 18 named non-bundle products + 5 bundle entries.
+  Nothing pooled, nothing hidden.
+
+  TWO EVIDENCE TIERS, structurally different components:
+    .card         product-level evidence. Price/weight/state are real. 4 only.
+    .card--named  a NAME and nothing else. No price element exists at all.
+  FAMILY STATE IS NEVER PROMOTED TO PRODUCT STATE. Solid chip = product-level.
+  Dashed ↳ chip (.derived) = family-derived, unconfirmed for that product.
+
+  R10.1 — This Week is REMOVED from this page. It belongs on index.html#week
+  only; this page is the catalog. The four evidenced products keep their places
+  inside butters / oils / pantry, so nothing was lost by that deletion.
+  R10.1 — card copy shortened to customer-legible markers; the evidence
+  archaeology lives in the review notes, not on the storefront.
+  R10.1 — every photographic <img> carries intrinsic width/height, and an anchor
+  settle script corrects deep-link landing after late reflow. See DECISIONS.md.
+
+  H1 `كل عالم زاد` is the nav label verbatim — preserved. Footer المساعدة,
+  44x44 targets, sold-out .35/.88, the kitchen teaser and the seasonal editorial
+  block are all preserved.
+-->
+</head>
+
+<body data-page="world">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+
+<div class="announce" data-salla-setting="batch_open">
+  <span class="announce__dot"></span>
+  <span data-salla-setting="announcement_text">دفعة هذا الأسبوع مفتوحة · تُغلق الخميس ٩م</span>
+  <span class="announce__regions" data-salla-setting="announcement_regions">RIYADH · JEDDAH · DAMMAM</span>
+</div>
+
+<header class="hdr">
+  <div class="hdr__in">
+    <a class="hdr__logo" href="index.html" aria-label="زاد — الرئيسية">
+      <img src="_source/photos/brand02.png" alt="زاد">
+    </a>
+
+    <nav class="hdr__nav" aria-label="التنقل الرئيسي">
+      <a data-nav="week"    href="index.html#week">هذا الأسبوع</a>
+      <a data-nav="world"   href="world.html" aria-current="true">كل عالم زاد</a>
+      <a data-nav="bundles" href="index.html#bundles">الباقات</a>
+      <a data-nav="season"  href="index.html#season">الموسمي</a>
+      <a data-nav="story"   href="index.html#story">حكاية زاد</a>
+    </nav>
+
+    <div class="hdr__actions">
+      <a class="hdr__act" href="#top" aria-label="البحث">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.2" cy="10.2" r="6.8"/><path d="M15.05 15.05 20.3 20.3"/>
+        </svg>
+      </a>
+      <a class="hdr__act" href="#top" aria-label="المفضلة">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 19.9c-1.1-.75-6.9-4.35-6.9-8.85a3.75 3.75 0 0 1 6.9-2.05 3.75 3.75 0 0 1 6.9 2.05c0 4.5-5.8 8.1-6.9 8.85Z"/>
+        </svg>
+      </a>
+      <a class="hdr__act" href="#top" aria-label="السلة — ٣ منتجات">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5.7 8.1h12.6l-1 11.15a1.6 1.6 0 0 1-1.6 1.45H8.3a1.6 1.6 0 0 1-1.6-1.45Z"/>
+          <path d="M9.2 8.1V6.55a2.8 2.8 0 0 1 5.6 0V8.1"/>
+        </svg>
+        <span class="hdr__badge" aria-hidden="true">٣</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ══ PAGE HEAD — destination title verbatim from the nav label ══ -->
+<section class="wrap pagehead" id="top">
+  <h1 class="pagehead__h1">كل عالم زاد</h1>
+  <p class="pagehead__sub">كل ما نصنعه</p>
+  <p class="pagehead__intro">سبع مجموعات: ستّ عوائل من المؤونة، والباقات والهدايا. كل ما نعرف اسمه مذكور هنا داخل عائلته — سواء كان في دفعة هذا الأسبوع أو لا. <a class="inlink" href="index.html#week">دفعة هذا الأسبوع ←</a></p>
+
+  <!-- Provenance, stated once, visibly, at the top of the catalog. -->
+  <p class="evnote">حالات المنتجات الأربعة ومهلة ٤٨ ساعة للمرق من <b>نموذج أوّلي مُستعاد</b> — ليست مخزونًا مباشرًا ولا التزامًا بالتوفّر اليوم.</p>
+
+  <!-- Legend for the two chip kinds, where they are first seen. -->
+  <div class="legend" aria-label="دليل الحالات">
+    <span class="legend__row">
+      <span class="world__pill" style="color:#274E45;background:rgba(63,122,95,.11)"><span class="dot" style="background:#3F7A5F"></span>متوفر</span>
+      <span class="legend__t">حالة مثبتة للمنتج نفسه.</span>
+    </span>
+    <span class="legend__row">
+      <span class="derived">حالة العائلة</span>
+      <span class="legend__t">معروفة للعائلة فقط — <b>غير مؤكدة لهذا المنتج</b>.</span>
+    </span>
+  </div>
+
+  <hr class="pagehead__rule">
+</section>
+
+<!-- ══ CATEGORY JUMP NAV — desktop-sticky, mobile scrolls naturally ══ -->
+<nav class="wrap catnav" aria-label="الانتقال إلى المجموعات">
+  <a href="#cat-butters"><span class="dot" style="background:#3F7A5F"></span>زبدة المكسّرات</a>
+  <a href="#cat-oils"><span class="dot" style="background:#C08A3E"></span>الزيوت والشطات</a>
+  <a href="#cat-pantry"><span class="dot" style="background:#B9B2A0"></span>المؤونة والكونفي</a>
+  <a href="#cat-pickles"><span class="dot" style="background:#B9B2A0"></span>المخللات</a>
+  <a href="#cat-seasonal"><span class="dot" style="background:#886643"></span>الموسمي والمحصول</a>
+  <a href="#cat-broth"><span class="dot" style="background:#3F7A5F"></span>المرق والكولاجين</a>
+  <a href="#cat-bundles"><span class="dot" style="background:#886643"></span>الباقات والهدايا</a>
+</nav>
+
+
+<!-- ══════════ THE COMPLETE CATALOG — 7 categories, 23 entries ══════════ -->
+
+<section class="wrap catsec catsec--first" id="cat-butters">
+  <div class="cathead">
+    <div class="cathead__t">
+      <h2 class="h2">زبدة المكسّرات</h2>
+      <span class="cathead__state"><span class="cathead__k">حالة العائلة</span>
+        <span class="world__pill" style="color:#274E45;background:rgba(63,122,95,.11)"><span class="dot" style="background:#3F7A5F"></span>متوفر</span></span>
+    </div>
+    <p class="cathead__desc">فول سوداني، فستق، لوز، كاجو — تُطحن يوم الشحن.</p>
+  </div>
+  <div class="catgrid">
+
+    <article class="card">
+      <div class="card__media">
+        <img src="_source/photos/peanut-butter-counter.jpeg" width="900" height="1600" alt="زبدة فول سوداني بالتمر">
+        <span class="card__state" style="color:#274E45;border-color:rgba(63,122,95,.45)">
+          <span class="dot" style="background:#3F7A5F"></span>متوفر</span>
+      </div>
+      <div class="card__body">
+        <span class="card__attr card__attr--ar">أساسي أسبوعي</span>
+        <h3 class="card__name">زبدة فول سوداني بالتمر</h3>
+        <div class="card__meta">
+          <span class="card__price mono">58</span><span class="card__cur">ر.س</span><span class="card__weight">٣٥٠غ</span>
+        </div>
+        <a class="card__act card__act--buy" href="#cat-butters" aria-label="أضيفي زبدة فول سوداني بالتمر للسلة">أضيفي للسلة</a>
+      </div>
+    </article>
+
+    <!-- Photograph pending: the only pistachio-named frame in the set is a
+         PEANUT butter jar. Not substituted, and NOT marked sold out. -->
+    <article class="card">
+      <div class="card__media card__media--pending">
+        <span class="card__pending">بانتظار صورة المنتج</span>
+        <span class="card__state" style="color:#274E45;border-color:rgba(63,122,95,.45)">
+          <span class="dot" style="background:#3F7A5F"></span>متوفر</span>
+      </div>
+      <div class="card__body">
+        <span class="card__attr card__attr--ar">أساسي أسبوعي</span>
+        <h3 class="card__name">زبدة فستق خفيفة التحميص</h3>
+        <div class="card__meta">
+          <span class="card__price mono">78</span><span class="card__cur">ر.س</span><span class="card__weight">٢٥٠غ</span>
+        </div>
+        <a class="card__act card__act--buy" href="#cat-butters" aria-label="أضيفي زبدة فستق خفيفة التحميص للسلة">أضيفي للسلة</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending">
+        <span class="card__pending">لا توجد صورة</span>
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">زبدة لوز</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: متوفر</span>
+        <a class="card__act card__act--wait" href="#cat-butters" aria-label="سجّلي رغبتك في زبدة لوز">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending">
+        <span class="card__pending">لا توجد صورة</span>
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">زبدة كاجو</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: متوفر</span>
+        <a class="card__act card__act--wait" href="#cat-butters" aria-label="سجّلي رغبتك في زبدة كاجو">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="wrap catsec" id="cat-oils">
+  <div class="cathead">
+    <div class="cathead__t">
+      <h2 class="h2">الزيوت والشطات</h2>
+      <span class="cathead__state"><span class="cathead__k">حالة العائلة</span>
+        <span class="world__pill" style="color:#7A5327;background:rgba(192,138,62,.14)"><span class="dot" style="background:#C08A3E"></span>باقي ٢</span></span>
+    </div>
+    <p class="cathead__desc">زيت فلفل، شطة مخمّرة، زيت أعشاب.</p>
+  </div>
+  <div class="catgrid">
+
+    <article class="card">
+      <div class="card__media">
+        <img src="_source/photos/hand-chili-oil.jpeg" width="1066" height="1600" alt="زيت فلفل حار">
+        <span class="card__state" style="color:#7A5327;border-color:rgba(192,138,62,.55)">
+          <span class="dot" style="background:#C08A3E"></span>باقي ٢</span>
+      </div>
+      <div class="card__body">
+        <span class="card__attr"></span>
+        <h3 class="card__name">زيت فلفل حار</h3>
+        <div class="card__meta">
+          <span class="card__price mono">78</span><span class="card__cur">ر.س</span><span class="card__weight">٢٠٠مل</span>
+        </div>
+        <a class="card__act card__act--buy" href="#cat-oils">أضيفي للسلة<span class="card__left">باقي ٢</span></a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending">
+        <span class="card__pending">لا توجد صورة</span>
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">شطة مخمّرة</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: باقي ٢</span>
+        <a class="card__act card__act--wait" href="#cat-oils" aria-label="سجّلي رغبتك في شطة مخمّرة">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending">
+        <span class="card__pending">لا توجد صورة</span>
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">زيت أعشاب</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: باقي ٢</span>
+        <a class="card__act card__act--wait" href="#cat-oils" aria-label="سجّلي رغبتك في زيت أعشاب">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="wrap catsec" id="cat-pantry">
+  <div class="cathead">
+    <div class="cathead__t">
+      <h2 class="h2">المؤونة والكونفي</h2>
+      <span class="cathead__state"><span class="cathead__k">حالة العائلة</span>
+        <span class="world__pill" style="color:var(--muted);background:rgba(185,178,160,.22)"><span class="dot" style="background:#B9B2A0"></span>نفدت</span></span>
+    </div>
+    <p class="cathead__desc">كونفي طماطم وثوم، معجون فلفل مشوي، جرانولا.</p>
+  </div>
+  <div class="catgrid">
+
+    <!-- Frame is a crop onto the real, legible `Tomato Confit` jar. -->
+    <article class="card is-sold">
+      <div class="card__media card__media--jar card__media--jar-tomato">
+        <img src="_source/photos/jars-six-stack.jpeg" width="1066" height="1600" alt="برطمان كونفي الطماطم من زاد على الرف">
+        <span class="card__state" style="color:var(--muted);border-color:rgba(185,178,160,.65)">
+          <span class="dot" style="background:#B9B2A0"></span>نفدت</span>
+      </div>
+      <div class="card__body">
+        <span class="card__attr"></span>
+        <h3 class="card__name">كونفي طماطم</h3>
+        <div class="card__meta">
+          <span class="card__price mono">64</span><span class="card__cur">ر.س</span><span class="card__weight">٣٠٠غ</span>
+        </div>
+        <a class="card__act card__act--wait" href="#cat-pantry">علّميني إذا توفر</a>
+      </div>
+    </article>
+
+    <!-- Frame is a crop onto the real, legible `Garlic Confit.` jar. -->
+    <article class="card card--named">
+      <div class="card__media card__media--jar card__media--jar-garlic">
+        <img src="_source/photos/jars-tower.jpeg" width="1066" height="1600" alt="برطمان كونفي الثوم من زاد على الرف">
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">كونفي ثوم</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: نفدت</span>
+        <a class="card__act card__act--wait" href="#cat-pantry" aria-label="سجّلي رغبتك في كونفي ثوم">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending">
+        <span class="card__pending">لا توجد صورة</span>
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">معجون فلفل مشوي</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: نفدت</span>
+        <a class="card__act card__act--wait" href="#cat-pantry" aria-label="سجّلي رغبتك في معجون فلفل مشوي">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending">
+        <span class="card__pending">لا توجد صورة</span>
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">جرانولا الشوفان والعسل</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين · مذكورة ضمن باقة الفطور</p>
+        <span class="derived">حالة العائلة: نفدت</span>
+        <a class="card__act card__act--wait" href="#cat-pantry" aria-label="سجّلي رغبتك في جرانولا الشوفان والعسل">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="wrap catsec" id="cat-pickles">
+  <div class="cathead">
+    <div class="cathead__t">
+      <h2 class="h2">المخللات</h2>
+      <span class="cathead__state"><span class="cathead__k">حالة العائلة</span>
+        <span class="world__pill" style="color:var(--muted);background:rgba(185,178,160,.22)"><span class="dot" style="background:#B9B2A0"></span>ليس في الدفعة</span></span>
+    </div>
+    <p class="cathead__desc">خيار، لفت، ليمون — تخمير طبيعي بلا خلّ صناعي.</p>
+    <p class="cathead__note">ليست في دفعة هذا الأسبوع، وتبقى ظاهرة هنا — رغبتك تُحسب في تخطيط الدفعة القادمة. <b>الحالة معروفة للعائلة فقط.</b></p>
+  </div>
+  <div class="catgrid">
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
+      <div class="card__body">
+        <h3 class="card__name">مخلل خيار</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: ليس في الدفعة</span>
+        <a class="card__act card__act--wait" href="#cat-pickles" aria-label="سجّلي رغبتك في مخلل خيار">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
+      <div class="card__body">
+        <h3 class="card__name">مخلل لفت</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: ليس في الدفعة</span>
+        <a class="card__act card__act--wait" href="#cat-pickles" aria-label="سجّلي رغبتك في مخلل لفت">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
+      <div class="card__body">
+        <h3 class="card__name">مخلل ليمون</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: ليس في الدفعة</span>
+        <a class="card__act card__act--wait" href="#cat-pickles" aria-label="سجّلي رغبتك في مخلل ليمون">سجّلي رغبتك</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="wrap catsec" id="cat-seasonal">
+  <div class="cathead">
+    <div class="cathead__t">
+      <h2 class="h2">الموسمي والمحصول</h2>
+      <span class="cathead__state"><span class="cathead__k">حالة العائلة</span>
+        <span class="world__pill" style="color:#886643;background:rgba(136,102,67,.04)"><span class="dot" style="background:#886643"></span>موسمي</span></span>
+    </div>
+    <p class="cathead__desc">مربّى التين، دبس الرمان، تمر محشو.</p>
+    <p class="cathead__note">يُحضَّر من محصوله في وقته، ولمّا يخلص المحصول يخلص الصنف — ولا نعرف بعد متى يرجع. <b>الحالة معروفة للعائلة فقط.</b></p>
+  </div>
+  <div class="catgrid">
+
+    <article class="card card--named">
+      <div class="card__media">
+        <img src="_source/photos/compote-spoon.jpeg" width="1066" height="1600" alt="ملعقة ترفع ثمرة محفوظة في القطر من وعاء">
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">مربّى التين</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين · صورة تحريرية</p>
+        <span class="derived">حالة العائلة: موسمي</span>
+        <a class="card__act card__act--wait" href="#cat-seasonal" aria-label="علّميني عند موسم مربّى التين">علّميني عند الموسم</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
+      <div class="card__body">
+        <h3 class="card__name">دبس الرمان</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: موسمي</span>
+        <a class="card__act card__act--wait" href="#cat-seasonal" aria-label="علّميني عند موسم دبس الرمان">علّميني عند الموسم</a>
+      </div>
+    </article>
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
+      <div class="card__body">
+        <h3 class="card__name">تمر محشو</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة العائلة: موسمي</span>
+        <a class="card__act card__act--wait" href="#cat-seasonal" aria-label="علّميني عند موسم تمر محشو">علّميني عند الموسم</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="wrap catsec" id="cat-broth">
+  <div class="cathead">
+    <div class="cathead__t">
+      <h2 class="h2">المرق والكولاجين</h2>
+      <span class="cathead__state"><span class="cathead__k">حالة العائلة</span>
+        <span class="world__pill" style="color:#274E45;background:rgba(63,122,95,.11)"><span class="dot" style="background:#3F7A5F"></span>على الطلب · ٤٨س</span></span>
+    </div>
+    <p class="cathead__desc">مرق عظام يُطبخ ١٨ ساعة · يُحضّر بعد الطلب.</p>
+    <p class="cathead__note">يُحضَّر بعد الطلب. <b>مهلة ٤٨ ساعة مذكورة على مستوى الفئة</b>، لا لكل منتج على حدة.</p>
+  </div>
+  <div class="catgrid">
+
+    <article class="card card--named">
+      <div class="card__media card__media--pending"><span class="card__pending">لا توجد صورة</span></div>
+      <div class="card__body">
+        <h3 class="card__name">مرق عظام</h3>
+        <p class="card__unknown">السعر والوزن غير معروفين</p>
+        <span class="derived">حالة الفئة: على الطلب · ٤٨س</span>
+        <a class="card__act card__act--wait" href="#cat-broth">اطلبيه بالتحضير</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ══ 7th SECTION — IA decision, not an invented category. ══ -->
+<section class="wrap catsec" id="cat-bundles">
+  <div class="cathead">
+    <div class="cathead__t">
+      <h2 class="h2">الباقات والهدايا</h2>
+      <span class="cathead__state"><span class="cathead__k">تصنيف</span>
+        <span class="derived">ليست من عوائل المؤونة الستّ</span></span>
+    </div>
+    <p class="cathead__desc">باقة واحدة موصوفة، وأربع أسماء ومفاهيم من زاد.</p>
+    <p class="cathead__note">باقة الفطور وحدها لها محتويات وسعر موثّقان. <b>البقية لم تُحدَّد محتوياتها ولا أسعارها، ولم نفترضها.</b></p>
+  </div>
+
+  <ul class="bundles">
+
+    <li class="bundle--real">
+      <figure class="bundle__fig">
+        <img class="bundle__img" src="_source/photos/jars-six-stack.jpeg" width="1066" height="1600" alt="ستة برطمانات من مؤونة زاد مرصوفة على الرف">
+        <figcaption class="bundle__note">صورة توضيحية — ليست محتويات هذه الباقة.</figcaption>
+      </figure>
+      <div class="bundle__txt">
+        <h3 class="bundle__name">باقة الفطور</h3>
+        <p class="bundle__lede">ثلاث برطمانات نوصي بها مع بعض — تُشحن في صندوق واحد مبرّد.</p>
+        <ul class="bundle__items">
+          <li class="bundle__item">زبدة فول سوداني بالتمر<span>٣٥٠غ</span></li>
+          <li class="bundle__item">جرانولا الشوفان والعسل<span>٤٠٠غ</span></li>
+          <li class="bundle__item">مربّى التين الموسمي<span>٢٥٠غ</span></li>
+        </ul>
+        <div class="bundle__price">
+          <b class="mono">168</b>
+          <span class="bundle__cur">ر.س</span>
+          <span class="bundle__note">٣ برطمانات · صندوق واحد</span>
+        </div>
+        <div class="bundle__ctas">
+          <a class="btn btn--primary" href="#cat-bundles">أضيفي الباقة</a>
+          <a class="btn btn--secondary" href="#cat-bundles">تفاصيل الباقة</a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Four concepts. No price element, no item list — the absence IS the
+         signal. Full statement on the FIRST entry, inherited by the rest; if
+         reordered, the <p class="bundle__pending"> moves with position 1. -->
+    <li class="bundle--concept">
+      <div class="bundle__frame">
+        <img class="bundle__thumb" src="_source/photos/zad-trio-wood.jpeg" width="1600" height="1066"
+             alt="صورة توضيحية — ثلاثة برطمانات زاد صغيرة على سطح خشبي. ليست محتويات الباقة.">
+      </div>
+      <div class="bundle__cx">
+        <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
+        <h3 class="bundle__name">باقة المعلمات</h3>
+        <p class="bundle__pending">اسم ومفهوم من زاد. محتويات هذه الباقة وسعرها لم تُحدَّد بعد، ولم نفترض أيًّا منهما هنا. الصورة توضيحية فقط.</p>
+        <a class="btn btn--quiet" href="#cat-bundles" aria-label="سجّلي اهتمامك بباقة المعلمات">سجّلي اهتمامك</a>
+      </div>
+    </li>
+
+    <li class="bundle--concept">
+      <div class="bundle__frame">
+        <img class="bundle__thumb" src="_source/photos/peanut-butter-counter.jpeg" width="900" height="1600"
+             alt="صورة توضيحية — برطمان زاد على رخام مطبخ بيتي. ليست محتويات الباقة.">
+      </div>
+      <div class="bundle__cx">
+        <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
+        <h3 class="bundle__name">باقة البيت</h3>
+        <a class="btn btn--quiet" href="#cat-bundles" aria-label="سجّلي اهتمامك بباقة البيت">سجّلي اهتمامك</a>
+      </div>
+    </li>
+
+    <li class="bundle--concept">
+      <div class="bundle__frame bundle__frame--tight">
+        <img class="bundle__thumb" src="_source/photos/jars-tower.jpeg" width="1066" height="1600"
+             alt="صورة توضيحية — برطمانان من زاد بغطاء قماشي عن قرب. ليست محتويات الباقة.">
+      </div>
+      <div class="bundle__cx">
+        <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
+        <h3 class="bundle__name">باقة الأسبوع</h3>
+        <a class="btn btn--quiet" href="#cat-bundles" aria-label="سجّلي اهتمامك بباقة الأسبوع">سجّلي اهتمامك</a>
+      </div>
+    </li>
+
+    <li class="bundle--concept">
+      <div class="bundle__frame">
+        <img class="bundle__thumb" src="_source/photos/pancakes-candle.jpeg" width="1066" height="1600"
+             alt="صورة توضيحية — طاولة احتفال بيتية بشمعة وشرائط. ليست محتويات الباقة.">
+      </div>
+      <div class="bundle__cx">
+        <span class="bundle__chip"><span class="dot"></span>مفهوم قيد التعريف</span>
+        <h3 class="bundle__name">باقة هدية</h3>
+        <a class="btn btn--quiet" href="#cat-bundles" aria-label="سجّلي اهتمامك بباقة هدية">سجّلي اهتمامك</a>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+
+<!-- ══ KITCHEN TEASER — recovered ZAD copy, PRESERVED intact with its image ══ -->
+<section class="wrap sec--rule" aria-label="من المطبخ">
+  <div class="story__grid">
+    <img class="story__img" src="_source/photos/hand-chili-oil.jpeg" width="1066" height="1600" alt="تحضير زيت الفلفل في المطبخ" data-salla-setting="story_image">
+    <div class="story__txt">
+      <span class="eyebrow eyebrow--ar" data-salla-setting="story_eyebrow">من المطبخ</span>
+      <p class="story__pull" data-salla-setting="story_pull">نطبخ الزيت على نار هادئة ساعتين، ونتركه يبرد ليلة كاملة قبل التعبئة. ما نستعجل شيء.</p>
+      <p class="story__body" data-salla-setting="story_body">كل ما في زاد يبدأ من مكوّن نعرف مصدره: تمر من نخل العائلة، فلفل من محصول الموسم، وحليب طازج للزبدة. الوصفة قليلة المكوّنات لأن المكوّن نفسه كافٍ.</p>
+      <a class="arrowlink" href="story.html">حكاية زاد <i>←</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECONDARY EDITORIAL — seasonal. Preserved, demoted at 26px. ══ -->
+<section class="wrap sec--tight season--secondary" id="season" aria-label="الموسمي">
+  <div class="season__grid">
+    <div class="season__txt">
+      <span class="eyebrow eyebrow--ar" data-salla-setting="season_eyebrow">الموسمي</span>
+      <h2 class="h2" data-salla-setting="season_title">التين على وشك الانتهاء</h2>
+      <p data-salla-setting="season_body">مربّى التين نحضّره من محصول الطائف، ولمّا يخلص المحصول يخلص المربّى. ما نعرف بعد متى يرجع.</p>
+      <a class="arrowlink" href="#cat-seasonal" data-salla-setting="season_link_label">الموسمي في الكتالوج <i>←</i></a>
+    </div>
+    <img class="season__img" src="_source/photos/compote-spoon.jpeg" width="1066" height="1600" alt="ثمرة محفوظة بالملعقة" data-salla-setting="season_image_1">
+    <img class="season__img season__img--offset" src="_source/photos/pancakes-candle.jpeg" width="1066" height="1600" alt="طاولة فطور بيتية" data-salla-setting="season_image_2">
+  </div>
+</section>
+
+<section class="wrap sec--tight" aria-label="وعود زاد">
+  <div class="promises" data-salla-setting="promises">
+    <div class="promise">
+      <span class="promise__k mono">01 · BATCH</span>
+      <span class="promise__t">دفعة كل جمعة</span>
+      <span class="promise__v">نحضّر بكمية محدودة ونعرض الباقي بصدق — بلا مخزون وهمي.</span>
+    </div>
+    <div class="promise">
+      <span class="promise__k mono">02 · INGREDIENTS</span>
+      <span class="promise__t">مكوّنات نعرف مصدرها</span>
+      <span class="promise__v">بلا سكر مضاف ولا مواد حافظة ولا زيوت نباتية مكرّرة.</span>
+    </div>
+    <div class="promise">
+      <span class="promise__k mono">03 · DELIVERY</span>
+      <span class="promise__t">شحن مبرّد</span>
+      <span class="promise__v">الرياض ٢٤ ساعة · جدة والدمام ٤٨ ساعة · صندوق واحد.</span>
+    </div>
+    <div class="promise">
+      <span class="promise__k mono">04 · NOT IN BATCH</span>
+      <span class="promise__t">ما ليس في الدفعة يبقى ظاهرًا</span>
+      <span class="promise__v">سجّلي رغبتك وتُحسب في تخطيط الأسبوع القادم.</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="ftr__in">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <img src="_source/photos/brand02.png" alt="زاد" data-salla-setting="footer_logo">
+        <span class="ftr__blurb" data-salla-setting="footer_blurb">إعادة الطعام إلى أصله · دفعات صغيرة تُحضّر كل جمعة في الرياض.</span>
+      </div>
+      <div class="ftr__cols" data-salla-setting="footer_columns">
+        <div class="ftr__col">
+          <span class="ftr__k mono">SHOP</span>
+          <span class="ftr__h">التسوّق</span>
+          <a href="index.html#week">هذا الأسبوع</a>
+          <a href="world.html">كل عالم زاد</a>
+          <a href="#cat-bundles">الباقات</a>
+          <a href="#cat-seasonal">الموسمي</a>
+        </div>
+        <div class="ftr__col">
+          <span class="ftr__k mono">ZAD</span>
+          <span class="ftr__h">زاد</span>
+          <a href="story.html">حكايتنا</a>
+          <a href="story.html">المطبخ</a>
+          <a href="index.html">الأسئلة</a>
+          <a href="index.html">تواصلي معنا</a>
+        </div>
+        <div class="ftr__col">
+          <span class="ftr__k mono">ORDERS</span>
+          <span class="ftr__h">المساعدة</span>
+          <a href="index.html">التوصيل</a>
+          <a href="index.html">التحضير</a>
+          <a href="index.html">الاستبدال</a>
+          <a href="index.html">الخصوصية</a>
+        </div>
+      </div>
+    </div>
+    <div class="ftr__bot">
+      <span class="ftr__cp" data-salla-setting="footer_copyright">© 2026 ZAD · ALL RIGHTS RESERVED</span>
+      <div class="ftr__by">
+        <span>DESIGNED BY</span>
+        <img src="_source/photos/brand01.svg" alt="KAMAYA">
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ ANCHOR SETTLE ═══════════════════════════════════════════════════════════
+     Deep category links were landing up to ~1.3k px short because the browser
+     performs its hash scroll BEFORE late layout work finishes — web-font swap
+     reflowing long Arabic runs, then image decode. This re-applies the SAME
+     native scroll once things settle. Nothing is intercepted: no hash, no work;
+     no JavaScript, and the page behaves exactly as it does today.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  function settle() {
+    if (!location.hash) return;
+    var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (t) t.scrollIntoView({block: 'start', behavior: 'auto'});
+  }
+  window.addEventListener('load', function () { settle(); setTimeout(settle, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle);
+  // R10 QA: `load` does not re-fire on a bfcache restore (Back, then into a
+  // second category), and a same-page hash change fires no load event at all —
+  // which is exactly the in-page jump-nav flow. Measured drift without these:
+  // deep anchors landed up to 405px low. pageshow + hashchange close both.
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { settle(); setTimeout(settle, 150); } });
+  window.addEventListener('hashchange', function () { settle(); setTimeout(settle, 150); });
+})();
+</script>
+
+</body>
+</html>

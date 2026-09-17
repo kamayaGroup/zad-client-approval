@@ -1,0 +1,1431 @@
+/* ============================================================================
+   ZAD — SHARED STYLESHEET
+   Tier-2 Internal / Founder Review Artifact. Not client-facing.
+   Not a Salla/Twilight implementation. Records no approval.
+   Revision 10.1 — catalog + gateway, plus the QA correction set.
+
+   ── WHAT REVISION 10 ADDED ──────────────────────────────────────────────────
+   §6a  HONEST JAR CROPS. .card__media--jar + --jar-garlic / --jar-tomato, so a
+        real labelled `Garlic Confit.` / `Tomato Confit` jar is shown as itself.
+        Numbers are MEASURED FROM THE SOURCE FILES, NOT RENDERED.
+   §6b  .card--named — the second evidence tier: a product with a NAME and
+        nothing else. No price, no weight, no invented state.
+   §9a  .evnote / .legend / .inlink — recovered-prototype provenance, the
+        two-chip legend, and the inline cross-link out to This Week.
+   §10b .catnav / .catsec / .cathead / .catgrid / .derived — world.html's full
+        categorized catalog. `.derived` is THE family-derived state treatment.
+   §17  .gates / .gate — index.html's photography-led category gateway.
+   §15b .branch gains a MOBILE hierarchy — name -> portrait image -> short brief
+        — scoped to body[data-page="home"] so story.html is untouched.
+
+   ── WHAT REVISION 10.1 CHANGES (measured QA correction set) ─────────────────
+   MOBILE DENSITY, the two named regressions and nothing else:
+     §17  the gateway mosaic goes to a 2-column grid with SQUARE tiles and ONE
+          wide lead (.gate--lead) instead of 4/5 tiles and two wide bands.
+          #world was the larger of the two regressions (+561px at 390).
+     §13  .promises goes 2-up at 390 instead of a single stacked column. Four
+          short micro-blocks stacked were the single largest run of repeated
+          empty space left on the mobile page.
+     §15  small rhythm trims in #story, which carried the other regression
+          (+166px) as a direct cost of the required name -> image -> brief order.
+   None of this removes content, hides anything behind a toggle, or shrinks a
+   single type size. See DECISIONS.md for the measurements and the rejected
+   alternatives.
+
+   ── PRESERVED VERIFIED REFINEMENTS — do not regress any of these ────────────
+   Arabic micro-label routing (§3) · 44x44 utility hit targets (§2c) · footer
+   المساعدة · the mobile -24px below the nav · header · product cards (§6) ·
+   Hero geometry 480/600, crops, scrim and gradient stops (§4, UNTOUCHED) ·
+   sold-out .35/.88 (§6, DO NOT RE-DARKEN) · shelf band 21:9 (§7) · the archive
+   photograph's inset-outline + height:auto aspect fix (§15a, MUST SURVIVE) ·
+   the three branch mappings · the 0/48/96 stagger and the anti-card discipline
+   (§15b) · desktop scoped sticky rails on #world / #season / #bundles.
+
+   ── COLOUR RULE ─────────────────────────────────────────────────────────────
+     GOLD  --gold-2 #E3C15C  RESERVED for the single page-level primary CTA in
+                             the Hero (.hero__cta) and nothing else, ever.
+     GREEN --green   #274E45 in-card / in-section commerce action, cart badge.
+
+   Linked by index.html (data-page="home"), world.html (data-page="world") and
+   story.html (data-page="story"). Single source of truth for all three.
+   NOTE: revision-9's long incident narratives are condensed to the RULE each
+   established; no declaration was changed by that condensation. Full R9 text is
+   preserved at renders/r10/zad.r9.bak.css.
+   ========================================================================= */
+
+
+/* ── §1 TOKENS + RESET ───────────────────────────────────────────────────── */
+:root{
+  --green:#274E45;
+  --green-d:#1E3E37;
+  --bronze:#886643;
+  --ink:#16211D;
+  --body:#3D4741;
+  /* WCAG 2.1 SC 1.4.3 minimal correction (Founder-authorized, 2026-09-09).
+     Lightness-only darkening at CONSTANT hue and saturation — the smallest
+     perceptual change that reaches AA. Both tokens are used exclusively as
+     `color:` on text (17 usages, no border/background/fill/shadow), so no
+     composition, hierarchy, spacing, imagery or behaviour changes.
+     --muted was #6E6A5C (4.48:1 on the #EFE9DD pending frame) -> 4.54:1
+     --faint was #8E8878 (3.30:1 on --surface, 3.53:1 on white) -> 4.54 / 4.85:1 */
+  --muted:#676357;
+  --faint:#746E61;
+
+  --surface:#FAF7F1;
+  --cream:#F6F2E9;
+
+  --gold:#C9A45E;
+  --gold-2:#E3C15C;      /* RESERVED: Hero primary CTA only */
+  --batch-open:#C9A227;
+
+  --border:rgba(136,102,67,.28);
+  --hair:rgba(22,33,29,.13);
+
+  --r-btn:3px;
+  --r-field:4px;
+  --r-pill:999px;
+  --r-img:2px;
+
+  --tap:44px;
+
+  /* ── §1b GRID SYSTEM ──────────────────────────────────────────────────────
+     ONE max-width, ONE gutter scale, ONE editorial split track.
+       At 1440:  content = 1440 - 2x56 = 1328   media = 1328 - 340 - 64 = 924
+       At 1024:  content = 1024 - 2x36 =  952
+     FULL-BLEED IS DELIBERATE AND LIMITED to exactly two elements: the Hero
+     (#top) and the shelf band (.shelf). Both are photography. Everything else
+     is contained, and the shelf's caption is padded by --gutter so even the
+     full-bleed photography reports back to the same content edge.
+     ---------------------------------------------------------------------- */
+  --page-max:1440px;
+  --gutter:56px;         /* 36 at <=1180, 20 at <=719 — ONE gutter system */
+  --rail:340px;          /* editorial text column (heading + brief + CTA) */
+  --split-gap:64px;      /* rail -> media gap */
+  --grid-gap:40px;       /* between items inside the media column */
+  --measure:62ch;        /* prose measure — a deliberate limit, not a margin */
+  --sec-gap:88px;        /* space ABOVE a section transition */
+  --sec-gap-in:56px;     /* space BELOW it, before the heading */
+  --archive-max:931px;   /* NEVER-UPSCALE ceiling for assets/story-family.jpg */
+
+  /* ── §1c HEADER-DERIVED OFFSETS ───────────────────────────────────────────
+     --hdr-h is the REAL measured header height: 81 desktop / 77 tablet / 113
+     mobile. Everything that must clear the sticky header reads from this one
+     place, so an anchor landing and a pinned rail can never disagree.
+     --catnav-h is world.html's desktop sticky jump-nav; it feeds that page's
+     own anchor offset in §10b. ------------------------------------------- */
+  --hdr-h:81px;
+  --anchor-pad:16px;
+  --anchor-offset:calc(var(--hdr-h) + var(--anchor-pad));   /* 97px desktop */
+  --sticky-top:calc(var(--hdr-h) + 24px);                   /* 105px desktop */
+  --catnav-h:64px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--surface);
+  color:var(--ink);
+  font-family:'Almarai',system-ui,-apple-system,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  /* STICKY HAZARD, fixed. `overflow-x:hidden` on <body> makes the body a scroll
+     container in most engines, and position:sticky descendants then render but
+     never pin. `overflow-x:clip` clips identically WITHOUT creating a scroll
+     container. Do not swap this back. */
+  overflow-x:clip;
+}
+@supports not (overflow-x:clip){ body{overflow-x:hidden;} }
+
+.mono{font-family:'DM Mono',ui-monospace,SFMono-Regular,Menlo,monospace;}
+a{color:var(--green);text-decoration:none;}
+a:hover{color:var(--bronze);}
+img{display:block;max-width:100%;}
+h1,h2{text-wrap:balance;}
+:focus-visible{outline:2px solid var(--bronze);outline-offset:3px;}
+
+/* ANCHOR LANDING — every in-page target clears the sticky header by
+   --anchor-offset. Native anchors, so native back/forward keeps working.
+   ⚠ This alone is NOT sufficient when late layout work lands after the
+   browser's initial hash scroll (web-font swap over long Arabic runs, then
+   image decode). Each page carries a small `load`-time settle that re-applies
+   the SAME native scroll; every photographic <img> also carries intrinsic
+   width/height so its box is reserved before decode. See DECISIONS.md. */
+section[id],article[id],h1[id],h2[id],h3[id],[id].anchor{
+  scroll-margin-top:var(--anchor-offset);
+}
+
+.wrap{max-width:var(--page-max);margin-inline:auto;padding-inline:var(--gutter);}
+.sec{padding-top:var(--sec-gap);}
+.sec--tight{padding-top:64px;}
+
+
+/* ── §1d THE EDITORIAL SPLIT + THE PINNED RAIL ───────────────────────────────
+   .split is the single shared two-track relationship used by #story, #world,
+   #season and #bundles, so those four share related edges instead of each
+   inventing a sub-width. The rail sits at the inline-start (right in RTL) on
+   every section — deliberately NOT alternated, because an Arabic section
+   heading at the far left reads as broken RTL, not as rhythm.
+
+   .rail is sticky BY DEFAULT and released by opt-out (.rail--static), so a
+   section that wants pinning gets it from the shared token rather than a local
+   `top:` value. USED ON: #season (Founder instruction — this behaviour is the
+   origin of the whole request), #world and #bundles. #story is the single
+   opt-out; the reason is intent, not lack of travel — see §15a.
+   RELEASED ENTIRELY at <=1180 (the split collapses), under
+   @media (max-height:720px), under prefers-reduced-motion, and again explicitly
+   in the mobile block.
+   ------------------------------------------------------------------------- */
+.split{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);
+  gap:var(--split-gap);align-items:start;}
+.rail{display:flex;flex-direction:column;gap:16px;align-self:start;
+  position:sticky;top:var(--sticky-top);}
+.rail p{margin:0;font-size:13.5px;line-height:2;color:var(--body);}
+/* ONE scale moment inside the rail, at the register .pagehead__sub uses. */
+.rail__lede{display:block;margin-bottom:10px;font-size:20px;font-weight:400;
+  color:var(--ink);line-height:1.7;}
+.rail--static{position:static;}
+
+
+/* ── §2 ANNOUNCEMENT BAR ─────────────────────────────────────────────────── */
+.announce{display:flex;align-items:center;gap:16px;padding:9px var(--gutter);
+  background:var(--green);color:rgba(246,242,233,.9);font-size:11.5px;}
+.announce__dot{width:5px;height:5px;border-radius:var(--r-pill);
+  background:var(--batch-open);flex:none;}
+.announce__regions{margin-inline-start:auto;font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:.14em;color:rgba(246,242,233,.68);white-space:nowrap;}
+
+
+/* ── §2a HEADER SHELL ────────────────────────────────────────────────────── */
+.hdr{position:sticky;top:0;z-index:60;background:rgba(250,247,241,.96);
+  backdrop-filter:blur(14px);border-bottom:1px solid rgba(22,33,29,.11);}
+.hdr__in{display:flex;align-items:center;gap:34px;padding:14px var(--gutter);
+  max-width:var(--page-max);margin:0 auto;}
+.hdr__logo{display:flex;align-items:center;}
+.hdr__logo img{width:52px;height:52px;object-fit:contain;}
+
+.hdr__nav{display:flex;gap:24px;font-size:13.5px;}
+.hdr__nav a{display:inline-flex;align-items:center;min-height:var(--tap);
+  padding-bottom:5px;border-bottom:1px solid transparent;white-space:nowrap;
+  color:var(--body);font-weight:400;transition:color .18s ease,border-color .18s ease;}
+.hdr__nav a:hover{color:var(--bronze);}
+
+
+/* ── §2b ACTIVE-NAV MECHANISM ────────────────────────────────────────────────
+   ONE declaration block, two ways in, ONE treatment:
+     data-page          the dedicated destination pages (world.html, story.html)
+     aria-current=true  index.html's in-page destinations, set by the small
+                        script at the end of that file — the ACCESSIBILITY state
+                        first, with the styling riding on it.
+   FOUNDER RULE, preserved exactly: index.html at ROOT (no hash, or #top) has
+   ZERO active primary nav items — the ZAD logo is Home. index.html stays
+   data-page="home", which matches none of the selectors below, so this is ALSO
+   the no-script default and cannot be lost by a script failing to load.
+   index.html's #world section is deliberately NOT a destination key.
+   ⚠ OPEN QUESTION, flagged not decided: aria-current="page" is the more precise
+   value for world.html/story.html. One value is used across all three so ONE
+   selector covers every case; splitting later makes this [aria-current].
+   ------------------------------------------------------------------------- */
+body[data-page="week"]    .hdr__nav a[data-nav="week"],
+body[data-page="world"]   .hdr__nav a[data-nav="world"],
+body[data-page="bundles"] .hdr__nav a[data-nav="bundles"],
+body[data-page="season"]  .hdr__nav a[data-nav="season"],
+body[data-page="story"]   .hdr__nav a[data-nav="story"],
+.hdr__nav a[aria-current="true"]{
+  color:var(--ink);
+  font-weight:700;
+  border-bottom-color:var(--green);
+}
+
+
+/* ── §2c HEADER ICON FAMILY — 44x44 targets, stroke 1.6, 22px optical ────── */
+.hdr__actions{margin-inline-start:auto;display:flex;align-items:center;gap:4px;}
+.hdr__act{position:relative;display:flex;align-items:center;justify-content:center;
+  width:var(--tap);height:var(--tap);border-radius:var(--r-field);
+  color:var(--body);cursor:pointer;transition:background .18s ease,color .18s ease;}
+.hdr__act:hover{background:#F2EDE3;color:var(--bronze);}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;}
+/* numeral is Almarai, NOT DM Mono — DM Mono declares no Arabic-Indic coverage */
+.hdr__badge{position:absolute;top:0;inset-inline-end:0;
+  min-width:13px;height:13px;padding:0 3px;border-radius:var(--r-pill);
+  background:var(--green);color:var(--cream);
+  font-family:'Almarai',system-ui,sans-serif;font-weight:700;
+  font-size:9.5px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 2px var(--surface);}
+
+
+/* ── §3 SHARED SECTION HEADS + ARABIC MICRO-LABEL ROUTING ────────────────────
+   Base .eyebrow / .card__attr keep DM Mono + letter-spacing and are for LATIN
+   runs only. ARABIC runs route to the --ar variants: Almarai, letter-spacing 0.
+   ------------------------------------------------------------------------- */
+.eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;
+  color:var(--bronze);}
+.eyebrow--ar{font-family:'Almarai',system-ui,-apple-system,sans-serif;
+  font-size:11.5px;font-weight:700;letter-spacing:0;line-height:1.5;}
+
+.h2{margin:0;font-size:32px;font-weight:800;color:var(--green);line-height:1.4;}
+.arrowlink{display:inline-flex;align-items:center;gap:8px;min-height:var(--tap);
+  font-size:13px;font-weight:700;color:var(--green);
+  border-bottom:1px solid rgba(136,102,67,.34);white-space:nowrap;
+  width:fit-content;transition:all .18s ease;}
+.arrowlink:hover{color:var(--bronze);border-color:var(--bronze);gap:12px;}
+.arrowlink i{font-style:normal;color:var(--bronze);}   /* ← = "onward" in RTL */
+
+
+/* ── §4 HERO — approved Direction A. DO NOT ALTER. ───────────────────────────
+   Geometry 480/600, crops center 42% / center 30%, scrim bottom:0 height
+   68%/58%, gradient stops. NOT TOUCHED in revision 10. -------------------- */
+.hero{position:relative;width:100%;height:480px;overflow:hidden;}
+.hero__img{position:absolute;inset:0;width:100%;height:100%;max-width:none;
+  object-fit:cover;object-position:center 42%;}
+.hero__scrim{position:absolute;left:0;right:0;bottom:0;height:68%;pointer-events:none;
+  background:linear-gradient(to top,rgba(22,33,29,.82) 0%,rgba(22,33,29,.48) 48%,rgba(22,33,29,0) 100%);}
+.hero__content{position:absolute;bottom:48px;right:56px;max-width:530px;text-align:right;}
+.hero__kicker{font-size:12px;letter-spacing:.16em;color:var(--gold-2);margin:0 0 12px;
+  font-weight:500;text-shadow:0 1px 12px rgba(0,0,0,.5);}
+.hero__h1{font-size:40px;font-weight:800;color:var(--cream);line-height:1.28;margin:0 0 14px;
+  text-shadow:0 2px 24px rgba(0,0,0,.45);}
+.hero__sub{font-size:16px;font-weight:400;color:var(--cream);line-height:1.65;
+  margin:0 0 20px;max-width:460px;margin-inline-start:auto;}
+
+/* SC 1.4.3 — AA correction. Two local moves, with DIFFERENT scopes — an earlier
+   version of this comment wrongly called the whole change desktop-only:
+   1. The gradient below is DESKTOP-ONLY (@media min-width:721px); 390 passed.
+   2. Removing .hero__sub's opacity:.94 is in the BASE rule, so it applies at
+      ALL widths. Colour-only, no layout effect — 390 measured 13.24 -> 15.17:1.
+      The opacity diluted cream toward the photograph for no design intent.
+   The gradient is copy-block-scoped and fades to fully transparent outside the
+   text: not a global overlay, no paper panel. Photograph, crop, layout, type
+   sizes/weights/positions and the global palette are untouched. */
+@media (min-width:721px){
+  .hero__content::before{content:"";position:absolute;
+    inset:-28px -36px -24px -36px;z-index:0;pointer-events:none;
+    background:linear-gradient(to top,
+      rgba(22,33,29,.62) 0%,
+      rgba(22,33,29,.56) 62%,
+      rgba(22,33,29,0) 100%);}
+  /* All children, not an enumerated list — an enumerated version silently
+     missed .hero__cta and would have missed kicker/badge/scroll too.
+     position:relative with no offsets is layout-neutral. */
+  .hero__content > *{position:relative;z-index:1;}
+}
+.hero__badge{display:flex;width:fit-content;align-items:center;gap:8px;
+  background:rgba(246,242,233,.12);border:1px solid rgba(246,242,233,.45);
+  color:var(--cream);font-size:12.5px;font-weight:400;padding:6px 14px;
+  border-radius:var(--r-pill);margin-bottom:18px;}
+.hero__badge .dot{width:6px;height:6px;border-radius:var(--r-pill);
+  background:var(--gold-2);flex:none;}
+.hero__cta{display:inline-block;background:var(--gold-2);color:var(--ink);
+  font-weight:700;font-size:15px;padding:14px 32px;border-radius:var(--r-btn);}
+.hero__cta:hover{background:#EFD177;color:var(--ink);}
+.hero__scroll{display:block;margin-top:16px;font-size:12.5px;color:var(--cream);
+  opacity:.78;text-decoration:underline;text-underline-offset:3px;}
+.hero__scroll:hover{color:var(--cream);opacity:1;}
+
+
+/* ── §5 #week ────────────────────────────────────────────────────────────── */
+#week{padding-top:40px;}
+.week__head{display:flex;align-items:flex-end;justify-content:space-between;gap:36px;
+  padding-bottom:26px;border-bottom:1px solid var(--hair);flex-wrap:wrap;}
+.week__headL{display:flex;flex-direction:column;gap:12px;}
+.week__intro{margin:0;max-width:54ch;font-size:14px;line-height:2;color:var(--body);}
+.week__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;padding-top:32px;}
+
+
+/* ── §6 PRODUCT CARD ─────────────────────────────────────────────────────── */
+.card{display:flex;flex-direction:column;border:1px solid var(--border);
+  border-radius:var(--r-field);background:#fff;overflow:hidden;}
+.card__media{position:relative;width:100%;height:220px;overflow:hidden;background:#EFE9DD;}
+.card__media img{width:100%;height:100%;object-fit:cover;}
+.card__media img{filter:saturate(.90) contrast(.94) brightness(1.04) sepia(.08);}
+.card__media--isolate img{position:absolute;top:0;left:0;width:344.8%;height:auto;
+  max-width:none;transform:translate(-47%,-30%);}
+/* MISSING-ASSET FRAME. Centres the pending chip in the existing .card__media
+   box; the absolutely positioned .card__state is unaffected, so a card's real
+   availability pill still sits where it always does. Deliberately NOT a
+   placeholder illustration, NOT a grey box with an icon, and NOT the sold-out
+   treatment — a missing photograph is not an inventory state. */
+.card__media--pending{display:flex;align-items:center;justify-content:center;}
+.card__state{position:absolute;top:10px;inset-inline-start:10px;
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:.01em;white-space:nowrap;
+  padding:5px 10px;border-radius:5px;
+  background:rgba(250,247,241,.97);
+  border:1px solid transparent;
+  box-shadow:0 1px 3px rgba(22,33,29,.12);}
+.card__state .dot{width:5px;height:5px;border-radius:var(--r-pill);flex:none;}
+.card__body{display:flex;flex-direction:column;padding:16px;flex:1;}
+.card__attr{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.14em;
+  color:var(--bronze);line-height:1.4;min-height:16px;margin-bottom:6px;}
+.card__attr--ar{font-family:'Almarai',system-ui,-apple-system,sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:0;}
+.card__name{font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.5;margin:0;}
+.card__meta{display:flex;align-items:baseline;gap:6px;margin-top:auto;padding-top:14px;}
+.card__price{font-family:'DM Mono',monospace;font-size:20px;color:var(--ink);line-height:1;}
+.card__cur{font-size:11.5px;color:var(--faint);}
+.card__weight{margin-inline-start:auto;font-size:11.5px;color:var(--faint);}
+.card__act{display:flex;align-items:center;justify-content:center;
+  height:var(--tap);margin-top:12px;border-radius:var(--r-btn);
+  font-size:13px;font-weight:700;transition:all .18s ease;}
+.card__act--buy{background:var(--green);color:var(--cream);}
+/* SC 1.4.11 — a cream ring outside a dark button landed on a light card at
+   1.12:1, i.e. effectively invisible. Two-tone ring mirrors the treatment
+   already passing on a.branch/a.gate. Paints only on keyboard focus. */
+.card__act--buy:focus-visible{outline:3px solid var(--ink);outline-offset:3px;
+  box-shadow:inset 0 0 0 2px var(--cream);}
+.card__act--buy:hover{background:var(--green-d);color:var(--cream);}
+.card__act--wait{background:transparent;color:var(--body);
+  border:1px solid rgba(136,102,67,.36);}
+.card__act--wait:hover{border-color:var(--bronze);color:var(--bronze);}
+/* the evidenced remaining quantity rides the low-stock action as well as the
+   state pill, so "low" is legible at the moment of the decision. Only ever
+   populated from a real `left:` value; never inferred. */
+.card__left{margin-inline-start:10px;padding-inline-start:10px;
+  border-inline-start:1px solid rgba(246,242,233,.42);
+  font-weight:400;font-size:12px;opacity:.92;}
+/* SOLD-OUT — CONFIRMED CORRECT, DO NOT RE-DARKEN. */
+.card.is-sold .card__media img{
+  filter:saturate(.90) contrast(.94) brightness(1.04) sepia(.08) grayscale(.35);
+  opacity:.88;}
+
+
+/* ── §6a HONEST JAR CROPS ────────────────────────────────────────────────────
+   Two ZAD products have a REAL, legible, printed label in the recovered
+   photography and were not being shown as themselves:
+     كونفي ثوم    `Garlic Confit.`  top jar of jars-tower.jpeg
+     كونفي طماطم  `Tomato Confit`   top-right jar of jars-six-stack.jpeg
+   dc-logic.js maps كونفي طماطم to jars-tower.jpeg, which contains NO tomato jar
+   at all; assets/prod-tomato.jpg is a cropped derivative of the six-jar group,
+   not a packshot. Cropping onto the real labelled jar is RECOVERY, not
+   invention, and it is the only reason this device exists.
+
+   MECHANISM: verbatim §6's own .card__media--isolate idiom — no new vocabulary.
+   width:222% means the visible window is 45% of the source width (480px of
+   1066), so at a 308px card the image renders 684px wide: a DOWNSCALE at 1x.
+   ⚠ At 2x DPR that window is a ~1.28x upscale. Acceptable at review fidelity,
+   flagged rather than hidden.
+
+   ⚠ THE TRANSLATE VALUES ARE MEASURED FROM THE SOURCE FILES BY EYE AND COMPUTED
+   FROM THEM — NOT RENDERED. Jar centres used: garlic 55%/41% of jars-tower;
+   tomato 60%/38.8% of jars-six-stack. The Y term carries a ~1.5% dependence on
+   the frame's own aspect (~10px between the desktop 308x220 card and the mobile
+   169x140 one), below the jar's own margin in the window.
+   FALLBACK IS ONE STEP: remove --jar/--jar-* from the markup and the frame
+   reverts to the plain object-fit:cover behaviour every other card uses.
+   These crops are NEVER captioned as packshots — the alt text says what the
+   photograph actually is.
+   ------------------------------------------------------------------------- */
+.card__media--jar img{position:absolute;top:0;left:0;width:222%;height:auto;
+  max-width:none;}
+.card__media--jar-garlic img{transform:translate(-32.5%,-30.3%);}
+.card__media--jar-tomato img{transform:translate(-37.5%,-28.1%);}
+
+
+/* ── §6b .card--named — THE SECOND EVIDENCE TIER ─────────────────────────────
+   Fourteen ZAD products are recoverable as A NAME AND NOTHING ELSE. They are
+   not droppable and they are not priceable. This is a STRUCTURALLY DIFFERENT
+   component from .card, not .card with empty fields — the same reasoning §12
+   already applies to .bundle--concept:
+     · there is NO .card__meta, so no price and no weight element EXISTS to be
+       filled in later by accident;
+     · the unknowns are NAMED in .card__unknown rather than left blank;
+     · state is carried ONLY by .derived (§10b), the dashed family-derived chip,
+       never by .card__state, which is reserved for product-level evidence.
+   The recessed ground (--surface against .card's white) is what makes the two
+   tiers separable at a glance inside one grid, without shouting.
+   ⚠ .card__unknown is a customer-facing MARKER, not a provenance note. Keep it
+   to the missing facts themselves; the evidence archaeology belongs in the
+   review record, never on the storefront.
+   ------------------------------------------------------------------------- */
+.card--named{background:var(--surface);}
+.card--named .card__media{background:#F1EBDF;}
+.card--named .card__name{font-size:15px;}
+.card__unknown{margin:9px 0 14px;font-size:11.5px;line-height:1.9;color:var(--muted);}
+.card__unknown b{font-weight:700;color:var(--body);}
+/* margin-top:auto keeps the chip + action as the card's terminal block, so the
+   two tiers agree on where the action sits even at different content heights. */
+.card--named .derived{margin-top:auto;align-self:flex-start;}
+
+
+/* ── §7 SHELF BAND — 21:9, full-bleed, unchanged ─────────────────────────────
+   One of exactly two full-bleed elements. Its caption is padded by --gutter, so
+   the band reports back to the same content edge the contained sections use. */
+.shelf{margin-top:96px;}
+.shelf img{width:100%;aspect-ratio:21/9;object-fit:cover;object-position:center 46%;}
+.shelf__cap{max-width:var(--page-max);margin:0 auto;padding:14px var(--gutter) 0;
+  font-size:11.5px;color:var(--faint);}
+
+
+/* ── §8 KITCHEN EDITORIAL BLOCK ──────────────────────────────────────────────
+   .story__* is the recovered kitchen teaser treatment, intact on world.html as
+   an image+text grid. The text-only .kitchen block lives on story.html. ---- */
+.story__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+  gap:56px;align-items:center;}
+.story__img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-img);}
+.story__txt{display:flex;flex-direction:column;gap:22px;max-width:46ch;}
+.story__pull{margin:0;font-size:24px;line-height:1.85;color:var(--ink);text-wrap:pretty;}
+.story__body{margin:0;font-size:14px;line-height:2.05;color:var(--body);font-weight:300;}
+
+.kitchen{max-width:var(--measure);margin-top:46px;padding-top:36px;
+  border-top:1px solid var(--hair);}
+.kitchen .story__pull{margin-top:12px;}
+.kitchen .story__body{margin-top:16px;}
+
+
+/* ── §9 PAGE HEAD (destination pages) ────────────────────────────────────── */
+.pagehead{padding-top:52px;padding-bottom:8px;}
+.pagehead__h1{margin:0;font-size:42px;font-weight:800;color:var(--green);line-height:1.34;}
+.pagehead__sub{margin:10px 0 0;font-size:20px;font-weight:400;color:var(--body);
+  line-height:1.7;}
+/* .rail p is (0,1,1) and would otherwise win over .pagehead__sub (0,1,0) and
+   drop the standfirst to 13.5px the moment a page head sits in a rail. This
+   rule also carries #season's and #bundles' DESTINATION STANDFIRST — the
+   editorial headline displaced by the nav-label H2 above it. */
+.rail .pagehead__sub{margin-top:0;font-size:20px;line-height:1.7;
+  color:var(--body);}
+/* #week's head is a flex column with its own 12px gap, not a rail. Naming debt
+   recorded, not paid: this class now appears outside .pagehead. */
+.week__headL .pagehead__sub{margin-top:0;}
+.pagehead__intro{margin:18px 0 0;max-width:56ch;font-size:14px;line-height:2;
+  color:var(--body);}
+.pagehead__rule{margin-top:30px;border:0;border-top:1px solid var(--hair);}
+
+
+/* ── §9a PROVENANCE + STATE LEGEND + INLINE CROSS-LINK ───────────────────────
+   .evnote states ONCE, visibly and near the top of the catalog, that the four
+   product states and the 48h lead time are RECOVERED PROTOTYPE evidence rather
+   than live inventory. A designed block on the page, deliberately not a
+   footnote and deliberately not a warning banner — it reports provenance, it
+   does not raise an alarm.
+   .legend teaches the two chip kinds where they are first encountered, so the
+   solid/dashed distinction never depends on having scrolled past a note. Each
+   chip is ALSO self-labelling (`حالة العائلة:`), so the legend is
+   reinforcement, not the only carrier.
+   .inlink is the one inline text link in this file — it carries world.html's
+   pointer back to This Week, which lives on index.html only. It reuses
+   .arrowlink's hairline rather than introducing an underline style.
+   ------------------------------------------------------------------------- */
+.evnote{margin:20px 0 0;max-width:74ch;padding:13px 15px;
+  border:1px solid var(--border);border-radius:var(--r-field);
+  background:var(--cream);
+  font-size:12.5px;line-height:1.95;color:var(--body);}
+.evnote b{font-weight:700;color:var(--ink);}
+
+.legend{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:16px;}
+.legend__row{display:flex;align-items:center;gap:10px;}
+.legend__t{font-size:11.5px;line-height:1.8;color:var(--muted);max-width:40ch;}
+.legend__t b{font-weight:700;color:var(--body);}
+
+.inlink{font-weight:700;color:var(--green);white-space:nowrap;
+  border-bottom:1px solid rgba(136,102,67,.34);transition:all .18s ease;}
+.inlink:hover{color:var(--bronze);border-color:var(--bronze);}
+
+
+/* ── §10 #world CATEGORY ROWS — retained vocabulary ──────────────────────────
+   index.html's six-row list was replaced by the §17 photography gateway. These
+   rules are RETAINED, not deleted: .world__pill is now the shared FAMILY-STATE
+   pill used by world.html's category heads (§10b), and the row rules stay
+   available so the recovered list treatment is one step away.
+
+   D10 RULE, preserved: the row's third track must stay a dedicated `1fr` SLACK
+   track and .world__pill must keep justify-self:start. Ending the track list
+   `... auto auto` lets the pill background paint across its whole track —
+   measured at 334-380px of grey slab for the word متوفر. Do not restore it.
+   ------------------------------------------------------------------------- */
+.world__list{display:flex;flex-direction:column;}
+.world__row{display:grid;grid-template-columns:minmax(0,max-content) auto 1fr;
+  column-gap:26px;align-items:center;
+  padding:26px 0;border-bottom:1px solid rgba(22,33,29,.12);transition:all .18s ease;}
+/* HOVER NUDGE moved OFF the row's box model: under §10a's shared column system
+   a hover padding subtracts from the SHARED first track for that row only,
+   re-wrapping the descriptor and jumping the row height. */
+.world__row > *{transition:transform .18s ease;}
+.world__row:hover > *{transform:translateX(-10px);}
+.world__rowT{display:flex;flex-direction:column;gap:7px;min-width:0;}
+.world__name{font-size:22px;font-weight:700;color:var(--ink);line-height:1.45;}
+.world__desc{font-size:12.5px;line-height:1.9;color:var(--muted);}
+/* justify-self:start is what makes the pill HUG ITS OWN TEXT. Do not remove. */
+.world__pill{display:flex;align-items:center;gap:6px;white-space:nowrap;justify-self:start;
+  font-size:11px;font-weight:700;padding:6px 10px;border-radius:5px;}
+.world__pill .dot{width:4px;height:4px;border-radius:var(--r-pill);}
+.world__arrow{font-size:14px;color:var(--bronze);font-style:normal;justify-self:start;}
+.world__list--page .world__row{padding:22px 0;}
+
+/* ── §10a ONE SHARED COLUMN SYSTEM FOR THE ROWS ──────────────────────────── */
+@media (min-width:720px){
+  @supports (grid-template-columns:subgrid){
+    .world__list{display:grid;
+      grid-template-columns:minmax(0,max-content) auto 1fr;
+      column-gap:26px;}
+    .world__list .world__row{grid-column:1 / -1;grid-template-columns:subgrid;}
+    .world__list--page{column-gap:20px;}
+  }
+  .world__list--page .world__row{column-gap:20px;}
+  .world__list--page .world__arrow{justify-self:end;}
+}
+
+
+/* ── §10b THE COMPLETE CATALOG (world.html) ──────────────────────────────────
+   world.html carries every recoverable ZAD entry inside its natural category:
+   18 named non-bundle products across six evidenced families, plus five bundle
+   entries in a seventh section. Nothing is pooled into a generic "unavailable"
+   group and nothing is dropped.
+   ⚠ This Week deliberately does NOT appear on this page. Current-batch commerce
+   lives on index.html#week; this page is the catalog. The four evidenced
+   products appear here inside butters / oils / pantry, so the three roles —
+   gateway, catalog, current batch — stay separate and nothing is lost.
+
+   .derived IS THE LOAD-BEARING HONESTY DEVICE IN THIS FILE.
+   Three of the six states the Founder asked to see demonstrated — not in this
+   week's batch, seasonal, made to order — have NO product-level example
+   anywhere in the evidence. They exist only as family-level derivations, and
+   they are shown ONLY through this chip:
+     SOLID chip (.card__state / .world__pill)  state proven for THIS product.
+     DASHED chip (.derived)                    state known for the FAMILY only,
+                                               unconfirmed for this product.
+   The dashed hairline and the ↳ glyph are the whole distinction, used
+   identically at product level and in the category head, so the reader learns
+   it once. Every .derived instance also names itself in words
+   (`حالة العائلة: …`), so the treatment never depends on the legend alone.
+   Never restyle .derived to match .card__state — collapsing the two is exactly
+   the promotion of family state to product state this catalog exists to avoid.
+   ------------------------------------------------------------------------- */
+.derived{display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:700;line-height:1.55;color:var(--muted);
+  padding:5px 9px;border-radius:5px;
+  border:1px dashed rgba(136,102,67,.55);background:transparent;}
+.derived::before{content:"↳";font-weight:400;color:var(--bronze);flex:none;}
+
+/* JUMP NAV — one row, never wrapping, so its height is a known quantity the
+   anchor offset can absorb. Horizontal scroll is the SAME device .hdr__nav
+   already uses on mobile; no new pattern. Sticky on desktop only. */
+.catnav{display:flex;flex-wrap:nowrap;gap:8px;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  padding-top:24px;}
+.catnav::-webkit-scrollbar{display:none;}
+.catnav a{display:inline-flex;align-items:center;gap:7px;min-height:38px;
+  padding:0 13px;border-radius:var(--r-pill);
+  border:1px solid var(--border);background:var(--cream);
+  font-size:12.5px;font-weight:700;color:var(--body);white-space:nowrap;
+  transition:border-color .18s ease,color .18s ease;}
+.catnav a:hover{border-color:var(--bronze);color:var(--bronze);}
+.catnav .dot{width:5px;height:5px;border-radius:var(--r-pill);flex:none;}
+
+@media (min-width:720px){
+  .catnav{position:sticky;top:var(--hdr-h);z-index:40;
+    background:var(--surface);padding-top:14px;padding-bottom:14px;
+    box-shadow:0 1px 0 var(--hair);}
+  /* The jump-nav pins directly beneath the header, so on this page ONE token —
+     the existing --anchor-offset — has to clear both. --catnav-h is 38px chip +
+     2x14 padding = 66; 64 is used with 2px absorbed by --anchor-pad. QA
+     measured 84px clearance on the first category against an ~80px target, so
+     this arithmetic holds. ⚠ It depends on the chips staying ONE row — if they
+     ever wrap, it no longer does. */
+  body[data-page="world"]{
+    --anchor-offset:calc(var(--hdr-h) + var(--catnav-h) + var(--anchor-pad));
+  }
+}
+
+/* CATEGORY SECTION — reuses §16's transition device and its 88/56 rhythm
+   exactly; no new spacing scale. The FIRST catalog section takes space instead
+   of a hairline: it directly follows the jump-nav, which already carries its
+   own bottom hairline on desktop. */
+.catsec{position:relative;margin-top:var(--sec-gap);padding-top:var(--sec-gap-in);}
+.catsec::before{content:"";position:absolute;top:0;
+  inset-inline:var(--gutter);border-top:1px solid var(--hair);}
+.catsec--first::before{display:none;}
+
+.cathead{display:flex;flex-direction:column;gap:12px;
+  padding-bottom:22px;border-bottom:1px solid var(--hair);}
+.cathead__t{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.cathead__state{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.cathead__k{font-size:10px;font-weight:700;color:var(--faint);}
+.cathead__desc{margin:0;max-width:62ch;font-size:13.5px;line-height:2;color:var(--body);}
+/* the category-level explanation: seasonality, the not-in-batch rule, and the
+   48h lead time all live HERE, because that is the level the evidence is at */
+.cathead__note{margin:0;max-width:70ch;font-size:12.5px;line-height:1.95;
+  color:var(--muted);}
+.cathead__note b{font-weight:700;color:var(--body);}
+
+.catgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;padding-top:28px;}
+.catsec .bundles{padding-top:28px;}
+
+
+/* ── §11 #season ─────────────────────────────────────────────────────────────
+   RECOVERED CONTENT — every word and both photographs preserved. index.html's
+   #season sits on the shared split; world.html's .season--secondary block still
+   uses the original .season__grid rule below and is untouched.
+
+   STICKY: YES. The Founder named the seasonal title/copy sticky behaviour as
+   the pattern to keep and extend. A rail pins for (media height - rail height)
+   of scroll, not (media height - viewport height).
+
+   DOM ORDER IS LOAD-BEARING, do not swap the two images. .season__media tracks
+   are 1fr / 1.6fr, so in RTL the FIRST child takes the narrow right column and
+   the SECOND takes the wide left one. That is also what keeps the two
+   compote-spoon instances apart now that the old 160px .branches inset is gone:
+   COMPUTED at 1440 — compote-spoon in #season at x 56->600 (w 544, 3/4) against
+   the same frame in branch 02 at 512->928 (w 416, 2/3). 328px between their
+   inline-start edges, 31% apart in width, different aspect, and only the branch
+   instance carries an overlaid name.
+   ------------------------------------------------------------------------- */
+/* original rule — retained for world.html's .season--secondary block only */
+.season__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:44px;align-items:start;}
+.season__txt{display:flex;flex-direction:column;gap:18px;}
+.season__grid .season__txt{padding-top:38px;}
+.season__txt .h2{font-size:30px;}
+.season__txt p{margin:0;max-width:34ch;font-size:13.5px;line-height:2.05;color:var(--body);}
+.season__img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r-img);}
+.season__img--offset{margin-top:62px;}
+.season--secondary .season__txt{padding-top:0;}
+.season--secondary .h2{font-size:26px;}
+.season--secondary .season__img{aspect-ratio:4/3;}
+.season--secondary .season__img--offset{margin-top:0;}
+/* index.html only */
+.season__media{display:grid;grid-template-columns:1fr 1.6fr;gap:var(--grid-gap);
+  align-items:start;}
+
+
+/* ── §12 #bundles — A REPEATABLE COLLECTION ──────────────────────────────────
+   STICKY: YES. Five entries scroll beside a short rail.
+
+   TRUTHFULNESS IS THE POINT, so the two states are structurally different
+   components, not one component with a flag:
+     .bundle--real     the ONE evidenced bundle. Items, price, note, CTAs.
+     .bundle--concept  a Founder-supplied concept with NO verified contents,
+                       price or inventory. It has NO price element and NO item
+                       list AT ALL — the absence is the honest signal.
+   Separation uses the page's existing hairline, not a new card device. The
+   data-salla-* attributes are design-time annotation only; no Salla code here.
+   ------------------------------------------------------------------------- */
+.bundles{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;}
+
+.bundle--real{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  border:1px solid var(--hair);background:var(--cream);}
+/* D1 RULE, preserved: aspect-ratio makes the image's row-sizing contribution
+   SMALLER than the text column's, which hands the row height to the TEXT. Do
+   not restore an intrinsic-height contribution — that produced 294px of dead
+   cream below the CTAs. */
+.bundle__img{width:100%;height:100%;min-height:0;aspect-ratio:6/5;
+  object-fit:cover;object-position:center 64%;}
+/* The evidenced bundle's photograph is ILLUSTRATIVE ZAD photography, not a
+   picture of its listed contents, and carries a caption saying so. The figure
+   takes the image's place as the grid child so the caption travels with the
+   photograph instead of landing in the text column. */
+.bundle__fig{margin:0;display:flex;flex-direction:column;min-width:0;min-height:0;}
+.bundle__fig .bundle__img{flex:1 1 auto;height:auto;}
+.bundle__fig figcaption{padding:10px 14px 14px;}
+.bundle__txt{padding:36px;display:flex;flex-direction:column;gap:14px;}
+.bundle__name{margin:0;font-size:24px;font-weight:800;color:var(--ink);line-height:1.4;}
+.bundle__lede{margin:0;max-width:40ch;font-size:13.5px;line-height:2;color:var(--body);}
+/* margin, not margin-top: this is a <ul> and would otherwise inherit the UA
+   margin-block:1em between the items and the price. */
+.bundle__items{display:flex;flex-direction:column;margin:4px 0 0;list-style:none;padding:0;}
+.bundle__item{display:flex;justify-content:space-between;gap:14px;font-size:13px;
+  color:var(--body);padding:11px 0;border-bottom:1px solid rgba(22,33,29,.1);}
+.bundle__item span{color:var(--faint);white-space:nowrap;}
+.bundle__price{display:flex;align-items:baseline;gap:10px;margin-top:14px;}
+.bundle__price b{font-family:'DM Mono',monospace;font-size:26px;color:var(--ink);
+  font-weight:400;}
+.bundle__cur{font-size:13px;color:var(--faint);}
+.bundle__note{font-size:11.5px;color:var(--faint);}
+.bundle__ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+
+/* concept entries — no price, no items, no purchase.
+   The hairline is on the TOP of every concept entry and the extra air above the
+   first is bound to .bundle--real by ADJACENCY rather than position, so it
+   survives add / remove / reorder.
+   D3(b) RULE: the entry's ink is the HALF COLUMN, so every row terminates on
+   the same edge .bundle--real establishes. 228px = thumb 200 + gap 28. */
+.bundle--concept{display:grid;
+  grid-template-columns:200px minmax(0,calc(50% - 228px));
+  gap:28px;align-items:stretch;padding:26px 0;
+  border-top:1px solid var(--hair);}
+.bundle--real + .bundle--concept{margin-top:36px;}
+/* D11 + D11a RULES, both preserved and both load-bearing:
+   height:100% + min-height:0 keeps the frame from setting the row height (the
+   TEXT column does); width:100% makes the inline axis definite so aspect-ratio
+   can never run backwards and derive WIDTH from height — which painted 378px
+   frames into a 200px track and covered the disclaimer and its button.
+   aspect-ratio is KEPT rather than deleted: during intrinsic row sizing it is
+   still the frame's floor. Do not remove either declaration. */
+.bundle__frame{position:relative;overflow:hidden;aspect-ratio:16/9;
+  width:100%;height:100%;min-height:0;
+  border-radius:var(--r-img);background:#EFE9DD;}
+.bundle__thumb{width:100%;height:100%;object-fit:cover;display:block;
+  filter:sepia(.06) saturate(.95) contrast(.98);}
+/* ONE entry only — باقة الأسبوع, whose frame is the same painted-field
+   jar-stack setup as the real bundle's own photograph. 0.5x scale: a 400px
+   source window fills the 200px track, so no upscale at 2x DPR. The crop is
+   anchored at the CENTRE so it stays on the same part of the subject at any
+   frame height. 64% is not a new number — it is the object-position
+   .bundle__img already uses.
+   ⚠ COMPUTED FROM THE SOURCE FILE, NOT RENDERED. If it lands badly, remove the
+   modifier from the markup rather than tuning blind. */
+.bundle__frame--tight .bundle__thumb{position:absolute;top:50%;left:0;
+  width:266%;height:auto;max-width:none;
+  transform:translate(-35.3%,-64%);}
+.bundle__cx{display:flex;flex-direction:column;gap:12px;align-items:flex-start;}
+.bundle--concept .bundle__name{font-size:20px;color:var(--green);}
+/* ONE quiet chip, three uses: #bundles' `مفهوم قيد التعريف`, card w3's
+   `بانتظار صورة المنتج`, and the two no-photograph gateway tiles. One
+   declaration block, so the treatment cannot drift between them.
+   .card__pending carries no .dot child — a status dot there would read as an
+   inventory signal and collide with the card's real .card__state pill. */
+.bundle__chip,
+.card__pending{display:inline-flex;align-items:center;gap:7px;
+  font-size:11.5px;font-weight:700;color:var(--muted);
+  background:rgba(185,178,160,.18);border:1px solid rgba(185,178,160,.62);
+  padding:6px 11px;border-radius:5px;line-height:1.5;}
+.bundle__chip .dot{width:5px;height:5px;border-radius:var(--r-pill);
+  background:#B9B2A0;flex:none;}
+.bundle__pending{margin:0;max-width:none;font-size:12.5px;line-height:1.95;
+  color:var(--faint);}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;
+  height:var(--tap);padding:0 26px;border-radius:var(--r-btn);
+  font-size:13px;font-weight:700;transition:all .18s ease;cursor:pointer;}
+.btn--primary{background:var(--green);color:var(--cream);border:1px solid var(--green);}
+/* SC 1.4.11 — same fix: cream-on-cream measured 1.00:1 (invisible). */
+.btn--primary:focus-visible{outline:3px solid var(--ink);outline-offset:3px;
+  box-shadow:inset 0 0 0 2px var(--cream);}
+.btn--primary:hover{background:var(--green-d);color:var(--cream);}
+.btn--secondary{background:transparent;color:var(--green);
+  border:1px solid rgba(136,102,67,.36);}
+.btn--secondary:hover{border-color:var(--bronze);color:var(--bronze);}
+/* neutral, non-purchase — same register as the sold-out card's own action */
+.btn--quiet{background:transparent;color:var(--body);
+  border:1px solid rgba(136,102,67,.36);font-weight:400;}
+.btn--quiet:hover{border-color:var(--bronze);color:var(--bronze);}
+/* the concept row's TERMINAL element. Inert by construction — the frame is
+   cropped to the text, so margin-top:auto resolves to zero. KEPT deliberately
+   as the safety if one entry's copy ever grows past its neighbours. */
+.bundle--concept .btn--quiet{margin-top:auto;align-self:stretch;}
+
+
+/* ── §13 PROMISES ────────────────────────────────────────────────────────────
+   Its own top hairline is the ORIGINAL instance of the transition device §16
+   generalises; padding-top matches --sec-gap-in so they measure identically. */
+.promises{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:44px;padding-top:var(--sec-gap-in);border-top:1px solid var(--hair);}
+.promise{display:flex;flex-direction:column;gap:9px;}
+.promise__k{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.16em;
+  color:var(--bronze);}
+.promise__t{font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;}
+.promise__v{font-size:12.5px;line-height:1.95;color:var(--body);}
+
+
+/* ── §14 FOOTER ──────────────────────────────────────────────────────────── */
+.ftr{margin-top:96px;padding:64px var(--gutter) 44px;background:var(--ink);color:#C9C2AF;}
+.ftr__in{max-width:var(--page-max);margin:0 auto;}
+.ftr__top{display:grid;grid-template-columns:minmax(260px,1.3fr) repeat(3,minmax(0,1fr));
+  gap:48px;align-items:start;
+  padding-bottom:38px;border-bottom:1px solid rgba(246,242,233,.14);}
+.ftr__brand{display:flex;flex-direction:column;gap:16px;}
+.ftr__brand img{width:62px;height:62px;object-fit:contain;}
+.ftr__blurb{font-size:13px;color:rgba(246,242,233,.72);max-width:32ch;line-height:2;}
+.ftr__cols{display:contents;}
+.ftr__col{display:flex;flex-direction:column;gap:2px;}
+.ftr__k{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.16em;
+  color:rgba(246,242,233,.55);}
+.ftr__h{font-size:13px;font-weight:700;color:rgba(246,242,233,.86);
+  margin:6px 0 10px;line-height:1.5;}
+.ftr__col a{display:flex;align-items:center;min-height:32px;
+  font-size:12.5px;color:rgba(246,242,233,.78);white-space:nowrap;}
+.ftr__col a:hover{color:#fff;}
+.ftr__bot{display:flex;justify-content:space-between;align-items:center;gap:30px;
+  padding-top:26px;flex-wrap:wrap;}
+.ftr__cp{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;
+  color:rgba(246,242,233,.55);direction:ltr;unicode-bidi:isolate;}
+.ftr__by{display:flex;align-items:center;gap:12px;direction:ltr;}
+.ftr__by span{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.16em;
+  color:rgba(246,242,233,.55);}
+.ftr__by img{height:38px;width:auto;opacity:.6;}
+
+
+/* ── §15a STORY PROSE + ARCHIVAL BAND ────────────────────────────────────────
+   MUST SURVIVE: the archive photograph's hairline is an inset OUTLINE, never a
+   border. Under the global box-sizing:border-box a border is subtracted from
+   the content box while width:100% pins the outer box, which stretched a
+   photograph of PEOPLE by ~1.5%. The explicit height:auto keeps the intrinsic
+   ratio governing. Do not reintroduce a border here.
+   The 931px cap is a GRID SLOT on index.html: the split's media column computes
+   to 924px at 1440, 0.75% BELOW the asset's native width, so it is never
+   upscaled. --archive-max stays the hard ceiling everywhere narrower.
+   ⚠ This is the ONE image in the artifact with no reserved box, and that is
+   deliberate: its real pixel dimensions are not established anywhere in the
+   authorized evidence, and asserting an aspect-ratio here to stabilise layout
+   would distort a photograph of real people to make a number work. The
+   `load`-time anchor settle on index.html covers the landing instead.
+   ------------------------------------------------------------------------- */
+.storyband{margin-top:36px;}
+.storyband figure{margin:0;}
+.storyband img{width:100%;max-width:var(--archive-max);height:auto;
+  outline:1px solid var(--border);outline-offset:-1px;
+  border-radius:var(--r-img);
+  filter:sepia(.10) saturate(.94) contrast(.97);}
+.storyband figcaption{max-width:var(--archive-max);margin:12px 0 0;
+  font-size:11.5px;color:var(--faint);}
+
+.storytext{max-width:var(--measure);}
+.storytext p{margin:0 0 22px;font-size:15px;line-height:2.15;color:var(--body);}
+.storytext p:last-child{margin-bottom:0;}
+.storylead{margin:0;font-size:17px;line-height:2.05;color:var(--ink);}
+
+.storyclose{margin-top:10px;padding-top:36px;border-top:1px solid var(--hair);
+  max-width:var(--measure);}
+.storyclose p{margin:0 0 20px;font-size:17px;line-height:2.05;color:var(--ink);}
+.storyclose p:last-child{margin-bottom:0;}
+
+/* index.html #story — STICKY: NO. .rail--static, and the reason is INTENT, not
+   capability: there is ~825px of travel here. (1) #season, #world and #bundles
+   all pin; if #story pinned too, a device that applies everywhere is no longer
+   deliberate. (2) #story is already the differentiated section — it follows the
+   full-bleed shelf band and takes no .sec--rule. (3) This rail's CTA invites the
+   reader OFF the page, and pinning that beside the story you want read here
+   works against the section's own job. */
+.story__media{display:flex;flex-direction:column;}
+.story__media .storyband{margin-top:0;}
+.story__media .storyband img,
+.story__media .storyband figcaption{max-width:var(--archive-max);}
+.story__media .storytext{margin-top:28px;}
+/* D7 — the bridge sentence sits on the MEDIA column's edges, so it closes the
+   story copy on exactly the two edges the legacy paragraphs use. */
+.story__lead{margin-top:56px;
+  margin-inline-start:calc(var(--rail) + var(--split-gap));}
+
+
+/* ── §15b THE THREE BRANCHES — INTERACTIVE STORY ENTRIES ─────────────────────
+   The composition the Creative Director passed is KEPT: three portrait
+   photographs sitting directly on the page ground, the 0/48/96 stagger, one
+   shared warm treatment, the mobile stack, the RTL order, the three mappings
+   (عز hand-chili-oil · مجد compote-spoon · فرح peanut-butter-counter).
+
+   THE WHOLE PANEL IS A NATIVE <a> on index.html — keyboard-focusable and
+   Enter-activatable for free, real link semantics, native back/forward, because
+   the destinations are real anchors. On story.html the same panels are
+   <article>: that page IS the destination.
+   LEGIBILITY IS A LOCAL GRADIENT ONLY. .branch__veil covers the bottom 46% and
+   nothing else — the same discipline as the approved .hero__scrim.
+   TWO-TIER NAME — a demoted shared prefix plus a full-weight differentiator.
+   FOCUS RING — deliberately NOT gold; --gold-2 is reserved for the Hero CTA.
+   CROP HONESTY: sources are 1066x1600 (0.666). Desktop uses the NATIVE 2/3, so
+   no crop occurs and no object-position is authored. The latitude is spent on
+   mobile at 4/5, per panel.
+   ------------------------------------------------------------------------- */
+.branches{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--grid-gap);
+  align-items:start;margin-top:34px;}
+.branch{display:block;color:inherit;position:relative;border-radius:var(--r-img);}
+.branch--2{margin-top:48px;}
+.branch--3{margin-top:96px;}
+
+.branch__fig{margin:0;position:relative;overflow:hidden;border-radius:var(--r-img);}
+.branch__img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;
+  filter:sepia(.06) saturate(.95) contrast(.98);
+  transition:transform .5s ease;}
+.branch__veil{position:absolute;left:0;right:0;bottom:0;height:46%;
+  pointer-events:none;
+  background:linear-gradient(to top,
+    rgba(22,33,29,.76) 0%,rgba(22,33,29,.40) 52%,rgba(22,33,29,0) 100%);}
+/* D9 — panel 03 only. A SHORTER, DENSER ramp reads as an applied scrim; a
+   TALLER, SOFTER one reads as light falling away. فرح's marble is the brightest
+   ground in the set, so it gets more RAMP — deliberately NOT global. */
+.branch--3 .branch__veil{height:58%;}
+/* story.html's caption group — absolutely positioned. index.html no longer uses
+   this; it is retained because story.html's panels do. Do not delete. */
+.branch__cap{position:absolute;inset-inline:20px;bottom:18px;
+  display:flex;flex-direction:column;gap:7px;}
+/* Latin ordinal — DM Mono retained per the micro-label routing rule */
+.branch__ord{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;
+  color:rgba(246,242,233,.74);line-height:1;
+  text-shadow:0 1px 8px rgba(0,0,0,.55);}
+.branch__name{margin:0;font-size:26px;font-weight:800;color:var(--cream);
+  line-height:1.35;text-shadow:0 2px 18px rgba(0,0,0,.5);}
+.branch__brand{font-weight:400;color:rgba(246,242,233,.72);}
+.branch__desc{font-size:13px;font-weight:400;color:rgba(246,242,233,.92);
+  line-height:1.7;text-shadow:0 1px 10px rgba(0,0,0,.55);}
+.branch__go{font-style:normal;margin-inline-start:8px;
+  color:rgba(246,242,233,.82);transition:margin .18s ease;}
+
+a.branch:hover .branch__img{transform:scale(1.02);}
+a.branch:hover .branch__go{margin-inline-start:14px;}
+a.branch:hover .branch__name{color:var(--cream);}
+a.branch:focus-visible{outline:3px solid var(--ink);outline-offset:4px;}
+a.branch:focus-visible .branch__fig{box-shadow:inset 0 0 0 2px rgba(246,242,233,.96);}
+
+/* ── §15b-2 MOBILE BRANCH HIERARCHY ──────────────────────────────────────────
+   Founder brief: on mobile, per panel, the order is NAME -> PORTRAIT IMAGE ->
+   SHORT BRIEF, stacked (explicitly NOT a carousel), with the ENTIRE panel still
+   a single clickable link to its chapter anchor.
+
+   MECHANISM: the panel is a three-row grid whose children are real SIBLINGS —
+   head, figure, desc. At >=720px the FIGURE SPANS ALL THREE ROWS, so rows 2 and
+   3 land over the photograph's lower edge and the approved desktop composition
+   is reproduced exactly, with no absolute positioning and no fixed offsets to
+   go stale. Below 720px the same three rows simply stack. One structure, two
+   behaviours, no duplicated content.
+
+   ALTERNATIVE CONSIDERED AND REJECTED: duplicate the name and brief — one copy
+   inside the figure for desktop, one outside for mobile, toggled by display.
+   Rejected because it puts the same heading in the DOM twice, which every
+   assistive technology then announces twice, to buy nothing.
+
+   SCOPED TO body[data-page="home"]. story.html's panels are <article> elements
+   using .branch__cap and its own .branch__body prose beneath; none of it is in
+   scope and none of it is touched.
+   ------------------------------------------------------------------------- */
+body[data-page="home"] .branch{display:grid;grid-template-columns:minmax(0,1fr);}
+body[data-page="home"] .branch__head{display:flex;flex-direction:column;gap:6px;
+  position:relative;z-index:2;min-width:0;}
+body[data-page="home"] .branch__desc{position:relative;z-index:2;min-width:0;}
+
+@media (min-width:720px){
+  body[data-page="home"] .branch{grid-template-rows:1fr auto auto;}
+  body[data-page="home"] .branch__fig{grid-row:1 / -1;grid-column:1;}
+  body[data-page="home"] .branch__head{grid-row:2;grid-column:1;padding-inline:20px;}
+  body[data-page="home"] .branch__desc{grid-row:3;grid-column:1;padding:7px 20px 18px;}
+}
+
+/* story.html only — the chapter prose that hangs beneath each panel. */
+.branch__body{display:flex;flex-direction:column;margin-top:16px;}
+.branch__epithet{font-size:15px;color:var(--bronze);}
+.branch__text{margin:12px 0 0;font-size:14px;line-height:2.05;color:var(--body);
+  max-width:34ch;}
+
+
+/* ── §16 SECTION TRANSITIONS ─────────────────────────────────────────────────
+   The device is the page's EXISTING hairline — the same one .week__head and
+   .promises already use — inset to the content edges by a pseudo-element rather
+   than a border, because a border on .wrap would span the gutters and break the
+   content-edge alignment the whole grid is built on.
+   Rhythm is deliberately asymmetric: --sec-gap ABOVE the rule and --sec-gap-in
+   BELOW it, so the line binds forward to the section it opens.
+   #story takes NO rule: it follows the full-bleed shelf band, and a hairline
+   directly under a photograph fights the photograph.
+   §10b's .catsec reuses this device and these tokens verbatim.
+   ------------------------------------------------------------------------- */
+.sec--rule{position:relative;margin-top:var(--sec-gap);padding-top:var(--sec-gap-in);}
+.sec--rule::before{content:"";position:absolute;top:0;
+  inset-inline:var(--gutter);border-top:1px solid var(--hair);}
+
+
+/* ── §17 #world — PHOTOGRAPHY-LED CATEGORY GATEWAY (index.html) ──────────────
+   Replaces the six-row text list the Founder judged too text-list-heavy. This
+   section's job is DISCOVERY: world.html owns the complete catalog, #week owns
+   current-batch commerce, and this is the doorway. Seven categories, NO
+   products.
+
+   IT IS NOT A CARD GRID, AND THAT IS THE WHOLE POINT. The vocabulary is
+   borrowed wholesale from §15b's branch panels — photography sitting directly
+   on the page ground, no container, no fill, no border, no shadow, with the
+   name set on the frame behind a LOCAL bottom gradient. No new device enters
+   the file. The mosaic is deliberately ASYMMETRIC so it reads as an editorial
+   spread rather than seven interchangeable tiles.
+
+   ALTERNATIVE CONSIDERED AND REJECTED: a uniform grid of equal tiles. Rejected
+   because at equal size and aspect the seven categories carry no relative
+   weight, which is exactly the flatness the text list already had — the medium
+   would change while the problem stayed.
+
+   .gate--lead is the opening tile. On desktop it is simply one of the two
+   .gate--wide tiles; it exists as a separate hook so that MOBILE can keep one
+   wide anchor while everything else goes square. See the mobile block.
+
+   COMPUTED at 1440 (arithmetic, NOT rendered): the media column is 924, three
+   tracks with two 40px gaps give 281px columns; a span-2 tile is 602. A 16/9
+   wide tile is then 339 tall against a 4/5 portrait's 351, so the rows sit down
+   together without either being forced. align-items:start keeps the 12px
+   difference from stretching anything.
+
+   ⚠ TWO CATEGORIES HAVE NO AUTHENTIC PHOTOGRAPH ANYWHERE IN THE ZAD ASSET SET —
+   المخللات and المرق والكولاجين. .gate--nophoto is what they get: the same
+   .card__pending chip card w3 uses, in a dashed frame, with the caption moving
+   OFF the frame onto the page ground in ink rather than cream. No frame is
+   borrowed from another category to fill the hole, and nothing is fabricated.
+   A client content gap, recorded — not a design fix.
+   ------------------------------------------------------------------------- */
+.gates{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--grid-gap);
+  align-items:start;}
+.gate{display:block;color:inherit;position:relative;border-radius:var(--r-img);}
+.gate--wide{grid-column:span 2;}
+
+.gate__fig{margin:0;position:relative;overflow:hidden;border-radius:var(--r-img);
+  aspect-ratio:4/5;background:#EFE9DD;}
+.gate--wide .gate__fig{aspect-ratio:16/9;}
+.gate__img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:sepia(.06) saturate(.95) contrast(.98);
+  transition:transform .5s ease;}
+/* the one authored object-position in this section: jars-six-stack's confit
+   jars are its top row, and a 2/3 source in a 4/5 frame crops vertically. */
+.gate__img--confit{object-position:center 38%;}
+/* CD critique B1 — the caption must sit INSIDE the pending frame, at the same
+   inset as every photographic tile, or the tile reads as a broken image with a
+   fallen-off label. padding-bottom clears the caption so the chip stays centred
+   in the open area. Honesty is unchanged: same dashed edge, chip and words. */
+.gate__fig--pending{display:flex;align-items:center;justify-content:center;
+  padding-bottom:60px;border:1px dashed var(--border);}
+.gate__veil{position:absolute;left:0;right:0;bottom:0;height:52%;
+  pointer-events:none;
+  background:linear-gradient(to top,
+    rgba(22,33,29,.78) 0%,rgba(22,33,29,.42) 52%,rgba(22,33,29,0) 100%);}
+.gate__cap{position:absolute;inset-inline:20px;bottom:18px;
+  display:flex;flex-direction:column;gap:6px;}
+.gate__name{font-size:20px;font-weight:800;color:var(--cream);line-height:1.4;
+  text-shadow:0 2px 18px rgba(0,0,0,.5);}
+.gate--wide .gate__name{font-size:24px;}
+.gate__brief{font-size:12.5px;font-weight:400;color:rgba(246,242,233,.9);
+  line-height:1.7;text-shadow:0 1px 10px rgba(0,0,0,.55);}
+.gate__go{font-style:normal;margin-inline-start:8px;
+  color:rgba(246,242,233,.82);transition:margin .18s ease;}
+/* no photograph -> the caption cannot sit on one. It moves to the page ground
+   and takes the page's own ink, not cream on cream. */
+.gate--nophoto .gate__cap{margin-top:0;}
+.gate--nophoto .gate__name{color:var(--ink);text-shadow:none;}
+.gate--nophoto .gate__brief{color:var(--muted);text-shadow:none;}
+.gate--nophoto .gate__go{color:var(--bronze);}
+
+a.gate:hover .gate__img{transform:scale(1.02);}
+a.gate:hover .gate__go{margin-inline-start:14px;}
+a.gate:focus-visible{outline:3px solid var(--ink);outline-offset:4px;}
+a.gate:focus-visible .gate__fig{box-shadow:inset 0 0 0 2px rgba(246,242,233,.96);}
+
+
+/* ══ TABLET ═══════════════════════════════════════════════════════════════ */
+@media (max-width:1180px){
+  :root{
+    --gutter:36px;
+    --hdr-h:77px;        /* MEASURED at both 1024 and 1180 */
+  }
+  .hdr__in{padding:12px var(--gutter);gap:22px;}
+  .hdr__nav{gap:16px;font-size:12.5px;}
+  .week__grid{grid-template-columns:repeat(2,1fr);gap:24px;}
+  .catgrid{grid-template-columns:repeat(2,1fr);gap:24px;}
+
+  /* the editorial split collapses; rails release. A pinned rail above a stacked
+     single column has nothing to travel beside. */
+  .split{grid-template-columns:1fr;gap:34px;}
+  .rail{position:static;}
+  .story__lead{margin-inline-start:0;}
+  .season__media{grid-template-columns:1fr 1.6fr;gap:28px;}
+
+  .hero__content{right:36px;}
+  .pagehead__h1{font-size:36px;}
+  .ftr__top{grid-template-columns:repeat(3,minmax(0,1fr));gap:36px;}
+  .ftr__brand{grid-column:1 / -1;}
+
+  .branches{gap:28px;}
+  .branch--2{margin-top:34px;}
+  .branch--3{margin-top:68px;}
+  .branch__name{font-size:22px;}
+  .branch__desc{font-size:12.5px;}
+  .branch__cap{inset-inline:16px;bottom:15px;}
+  body[data-page="home"] .branch__head{padding-inline:16px;}
+  body[data-page="home"] .branch__desc{padding:7px 16px 15px;}
+
+  .gates{gap:28px;}
+  .gate__cap{inset-inline:16px;bottom:15px;}
+  .gate__name{font-size:18px;}
+  .gate--wide .gate__name{font-size:21px;}
+
+  .bundle--concept{grid-template-columns:170px minmax(0,calc(50% - 192px));
+    gap:22px;}
+}
+
+
+/* ══ SHORT-VIEWPORT GUARD ═════════════════════════════════════════════════════
+   A pinned rail is only honest if the whole rail fits between the header and
+   the bottom of the window. Height-based, so it catches a short desktop window
+   as well as a phone. */
+@media (max-height:720px){
+  .rail{position:static;}
+}
+
+
+/* ══ MOBILE (≤719px) ══════════════════════════════════════════════════════
+   RHYTHM   repeated empty space reduced across the section scale and the
+            heaviest sections. No content removed, no percentage targeted.
+   GUTTERS  ONE horizontal gutter system, --gutter:20px, carried by .wrap,
+            .announce, .hdr, .shelf__cap and .ftr alike. The ONLY full-bleed
+            elements stay the Hero and the shelf band, both photography and both
+            deliberate. .bundle__txt's inner inset is aligned to the same 20px.
+   STICKY   NATURAL SCROLL. Every editorial rail is released explicitly here
+            rather than left to the tablet block, and the catalog jump-nav is
+            never sticky on a phone. .hdr stays sticky — it is navigation, not
+            an editorial effect.
+   DENSITY  revision 10.1 closes the measured +555px mobile regression at its
+            two named sources, #world and #story. See DECISIONS.md.
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (max-width:719px){
+  :root{
+    --gutter:20px;
+    --hdr-h:113px;         /* measured */
+    --grid-gap:24px;
+    --sec-gap:44px;
+    --sec-gap-in:28px;
+  }
+  .sec{padding-top:var(--sec-gap);}
+  .sec--tight{padding-top:36px;}
+
+  /* natural scroll. Stated explicitly, not inherited. */
+  .rail{position:static;}
+  .catnav{position:static;}
+
+  .announce{padding:8px var(--gutter);gap:9px;font-size:11px;justify-content:center;}
+  .announce__regions{display:none;}
+
+  /* -24px below the mobile navigation: header bottom padding 10->8, nav
+     margin-top 2->0, .pagehead 32->12. The 38px nav-link min-height and the
+     44px utility targets are UNCHANGED. */
+  .hdr__in{padding:10px var(--gutter) 8px;gap:12px;flex-wrap:wrap;}
+  .hdr__logo img{width:40px;height:40px;}
+  .hdr__nav{order:3;width:100%;gap:18px;font-size:12.5px;
+    overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    margin-top:0;}
+  .hdr__nav::-webkit-scrollbar{display:none;}
+  .hdr__nav a{min-height:38px;padding-bottom:4px;}
+  .hdr__actions{gap:0;}
+
+  .hero{height:600px;}
+  .hero__img{object-position:center 30%;}
+  .hero__scrim{height:58%;}
+  .hero__content{bottom:28px;right:20px;left:20px;max-width:none;}
+  .hero__kicker{font-size:11px;letter-spacing:.14em;margin-bottom:10px;}
+  .hero__h1{font-size:26px;line-height:1.32;margin-bottom:10px;}
+  .hero__sub{font-size:13.5px;line-height:1.6;margin-bottom:14px;max-width:none;}
+  .hero__badge{font-size:11px;padding:5px 12px;margin-bottom:14px;}
+  .hero__cta{display:block;text-align:center;font-size:14.5px;padding:13px 0;}
+  .hero__scroll{margin-top:12px;font-size:11.5px;text-align:center;}
+
+  .h2{font-size:24px;}
+  .eyebrow--ar{font-size:11px;}
+  .pagehead{padding-top:12px;}
+  .pagehead__h1{font-size:28px;line-height:1.4;}
+  .pagehead__sub{font-size:16px;margin-top:8px;}
+  .rail .pagehead__sub{font-size:16px;margin-top:0;}
+  .rail__lede{font-size:17px;margin-bottom:8px;}
+  .pagehead__intro{font-size:13px;line-height:1.9;margin-top:14px;}
+  .pagehead__rule{margin-top:22px;}
+  .evnote{margin-top:16px;padding:12px 13px;font-size:12px;line-height:1.9;}
+  .legend{gap:10px 20px;margin-top:14px;}
+  .legend__row{align-items:flex-start;}
+  .legend__t{font-size:11px;max-width:none;}
+
+  .catnav{padding-top:18px;gap:7px;}
+  .catnav a{font-size:12px;padding:0 12px;min-height:36px;}
+
+  #week{padding-top:28px;}
+  .week__head{gap:18px;padding-bottom:18px;}
+  .week__intro{font-size:13px;line-height:1.9;}
+  .week__grid{grid-template-columns:repeat(2,1fr);gap:12px;padding-top:20px;}
+  .catgrid{grid-template-columns:repeat(2,1fr);gap:12px;padding-top:20px;}
+  .cathead{gap:10px;padding-bottom:18px;}
+  .cathead__t{gap:12px;}
+  .cathead__desc{font-size:13px;line-height:1.9;}
+  .cathead__note{font-size:12px;line-height:1.9;}
+  .catsec .bundles{padding-top:20px;}
+
+  .card__media{height:140px;}
+  .card__body{padding:12px;}
+  .card__attr{font-size:9px;min-height:15px;margin-bottom:5px;}
+  .card__attr--ar{font-size:10.5px;}
+  .card__name{font-size:13px;line-height:1.45;}
+  .card--named .card__name{font-size:13px;}
+  .card__unknown{font-size:11px;line-height:1.8;margin:8px 0 12px;}
+  .card__meta{padding-top:10px;gap:5px;}
+  .card__price{font-size:17px;}
+  .card__cur,.card__weight{font-size:10.5px;}
+  .card__act{height:40px;font-size:12px;margin-top:10px;}
+  .card__left{font-size:11px;margin-inline-start:8px;padding-inline-start:8px;}
+  .card__state{font-size:10px;padding:4px 8px;top:8px;inset-inline-start:8px;}
+  .derived{font-size:10.5px;padding:4px 8px;}
+
+  .shelf{margin-top:44px;}
+  .shelf img{aspect-ratio:4/3;}
+  .shelf__cap{padding:12px var(--gutter) 0;}
+
+  .story__grid{grid-template-columns:1fr;gap:26px;}
+  .story__pull{font-size:19px;line-height:1.75;}
+  .story__body{font-size:13.5px;line-height:1.95;}
+  .kitchen{margin-top:34px;padding-top:28px;}
+
+  .split{gap:20px;}
+  .story__media .storytext{margin-top:18px;}
+  .story__lead{margin-top:22px;}
+
+  .world__row{grid-template-columns:1fr auto;gap:12px;padding:20px 0;}
+  .world__list--page .world__row{padding:18px 0;}
+  .world__name{font-size:17px;}
+  .world__desc{font-size:12px;line-height:1.8;}
+  .world__arrow{display:none;}
+
+  /* ── GATEWAY, revision 10.1 ────────────────────────────────────────────────
+     MEASURED: #world was 860px at 390 in R9 and 1421px in R10 — the larger of
+     the two regressions. The cause was seven near-full-width tiles: five 4/5
+     portraits at 350px wide are 437px each before captions.
+     THE FIX IS DENSITY, NOT DELETION. Two columns, SQUARE tiles, and ONE wide
+     lead instead of two wide bands. All seven categories stay; none is hidden,
+     collapsed behind a toggle, or dropped; no type size is reduced.
+     ALTERNATIVES CONSIDERED AND REJECTED: (a) drop a category from the gateway
+     and leave it reachable only from world.html — rejected, that is removing
+     content to hit a number; (b) put the seven behind a horizontal carousel —
+     rejected, it hides six of seven categories behind a gesture and the Founder
+     explicitly rejected carousels for the branch panels on the same grounds;
+     (c) shrink .gate__name — rejected, the brief forbids shrinking type.
+     The brief is dropped on the NARROW tiles only: at ~167px the category NAME
+     is the payload, and a 12px supporting line under it is noise rather than
+     information. It is retained in full on the wide lead tile.
+     ---------------------------------------------------------------------- */
+  .gates{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .gate--wide{grid-column:auto;}
+  .gate--lead{grid-column:span 2;}
+  .gate__fig{aspect-ratio:1/1;}
+  .gate--wide .gate__fig{aspect-ratio:1/1;}
+  .gate--lead .gate__fig{aspect-ratio:16/9;}
+  .gate__cap{inset-inline:12px;bottom:11px;gap:4px;}
+  .gate__name{font-size:15px;line-height:1.35;}
+  .gate--wide .gate__name{font-size:15px;}
+  .gate--lead .gate__name{font-size:19px;}
+  .gate__brief{display:none;}
+  .gate--lead .gate__brief{display:block;font-size:11.5px;}
+  .gate--nophoto .gate__cap{margin-top:0;}
+  .gate__fig--pending{padding-bottom:38px;}
+  .gate__fig--pending .card__pending{font-size:10px;padding:5px 8px;
+    text-align:center;line-height:1.6;}
+
+  .season__grid{grid-template-columns:1fr;gap:22px;}
+  .season__media{grid-template-columns:1fr;gap:22px;}
+  .season__grid .season__txt{padding-top:0;}
+  .season__txt .h2{font-size:24px;}
+  .season--secondary .h2{font-size:21px;}
+  .season__img{aspect-ratio:4/3;}
+  .season__img--offset{margin-top:0;}
+
+  .bundle--real{grid-template-columns:1fr;}
+  .bundle__img{min-height:196px;}
+  /* the one bordered panel on the page insets to the same 20px the page gutter
+     uses, instead of a third, unrelated measure. */
+  .bundle__txt{padding:22px 20px;}
+  .bundle__name{font-size:21px;}
+  .bundle--concept{grid-template-columns:1fr;gap:16px;padding:18px 0;}
+  /* height:auto explicitly cancels the desktop height:100%. Mobile has no void
+     — the rows stack and the frame is alone in its own 1fr row. */
+  .bundle__frame{aspect-ratio:16/9;height:auto;}
+  .bundle--concept .btn--quiet{margin-top:6px;align-self:flex-start;}
+  .bundle--real + .bundle--concept{margin-top:22px;}
+  .bundle--concept .bundle__name{font-size:17px;}
+  .bundle__pending{font-size:12px;}
+  .btn{flex:1 1 auto;padding:0 16px;}
+  .bundle--concept .btn{flex:0 1 auto;}
+
+  /* ── PROMISES, revision 10.1 ───────────────────────────────────────────────
+     Four short micro-blocks stacked in a single column were the largest run of
+     repeated empty space left on the mobile page. Two-up at 390 gives each
+     ~165px, which still carries .promise__t at 15px and a 3-line .promise__v at
+     12.5px comfortably. No type size changes and no promise is dropped.
+     ---------------------------------------------------------------------- */
+  .promises{grid-template-columns:repeat(2,1fr);gap:24px 16px;}
+
+  /* STORY — independently judged mobile composition, not a scale-down.
+     BRANCHES stack one at a time; the 0/48/96 stagger is a desktop-only device
+     that reads as broken alignment when stacked. Panel aspect 4/5, and that is
+     where the modest object-position latitude is spent. Panels 01 and 02 keep
+     the CD-verified positions; panel 03 carries NO object-position and takes
+     the default centre rather than an invented focal point. */
+  .storyband{margin-top:16px;}
+  .storyband figcaption{margin-top:10px;font-size:11px;}
+  .storytext p{font-size:14px;line-height:2.05;margin-bottom:15px;}
+  .storylead{font-size:15.5px;line-height:1.95;}
+  .storyclose{padding-top:28px;}
+  .storyclose p{font-size:15px;line-height:1.95;margin-bottom:16px;}
+
+  .branches{grid-template-columns:1fr;gap:22px;margin-top:18px;}
+  .branch--2,.branch--3{margin-top:0;}
+  .branch__img{aspect-ratio:4/5;}
+  .branch--1 .branch__img{object-position:center 32%;}  /* hand + jar, verified */
+  /* D8 — hold the dark table edge that carries the label on desktop. At 4/5 the
+     window is 83.3% of the frame, so `bottom` runs 16.7%->100%: full table edge
+     in, top wall out, spoon and bowl untouched. Per-panel, never global. */
+  .branch--2 .branch__img{object-position:center bottom;}
+  .branch__veil{height:52%;}
+  .branch--3 .branch__veil{height:62%;}
+  .branch__cap{inset-inline:16px;bottom:14px;gap:6px;}   /* story.html only */
+  .branch__text{font-size:13.5px;line-height:2;max-width:none;}
+  .branch__epithet{font-size:13.5px;}
+
+  /* NAME -> IMAGE -> BRIEF, stacked. index.html only.
+     The caption is no longer over a photograph, so it takes the page's own ink
+     and body colours and drops its text-shadow; the veil is removed because its
+     only job was legibility over the frame. */
+  body[data-page="home"] .branch{grid-template-rows:auto auto auto;}
+  body[data-page="home"] .branch__head{grid-row:1;padding-inline:0;
+    flex-direction:row;align-items:baseline;gap:10px;margin-bottom:9px;}
+  body[data-page="home"] .branch__fig{grid-row:2;}
+  body[data-page="home"] .branch__desc{grid-row:3;padding:0;margin-top:9px;
+    font-size:13px;line-height:1.85;color:var(--body);text-shadow:none;}
+  body[data-page="home"] .branch__name{font-size:20px;color:var(--ink);
+    text-shadow:none;}
+  body[data-page="home"] .branch__brand{color:var(--faint);}
+  body[data-page="home"] .branch__ord{color:var(--bronze);text-shadow:none;}
+  body[data-page="home"] .branch__go{color:var(--bronze);}
+  body[data-page="home"] .branch__veil{display:none;}
+
+  .ftr{margin-top:48px;padding:40px var(--gutter) 32px;}
+  .ftr__top{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 20px;
+    padding-bottom:28px;}
+  .ftr__brand{grid-column:1 / -1;}
+  .ftr__h{font-size:12.5px;margin:5px 0 8px;}
+  .ftr__col a{min-height:40px;white-space:normal;}
+  .ftr__bot{gap:18px;}
+  .ftr__by img{height:32px;}
+}
+
+
+/* ══ REDUCED MOTION ═══════════════════════════════════════════════════════════
+   The editorial rails are RELEASED under reduced-motion: content that holds
+   still while the page moves past it is the same class of effect as parallax.
+   .hdr stays sticky deliberately — it is a persistent navigation affordance,
+   not an effect. The branch and gateway hover scales are disabled outright. */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important;}
+  .rail{position:static;}
+  .catnav{position:static;}
+  a.branch:hover .branch__img{transform:none;}
+  a.gate:hover .gate__img{transform:none;}
+}
+
+/* ── R10 QA correction ──────────────────────────────────────────────────────
+   Intrinsic width/height attributes were added to every real photograph so the
+   browser reserves each box before decode (anchor-landing stability). For any
+   image whose box is governed by CSS `aspect-ratio` with no declared height,
+   the HTML height attribute acts as a presentational hint and WINS — forcing
+   the full intrinsic pixel height (e.g. .branch__img rendered 350x1600 instead
+   of 350x437). `height:auto` hands control back to aspect-ratio.
+   This restores the intended rendering; it does not change the design.        */
+.shelf img,
+.story__img,
+.season__img,
+.branch__img{height:auto;}
+
+
+/* ── CD critique B2 ─────────────────────────────────────────────────────────
+   The illustrative qualifier must be VISIBLE, not alt-only. Concept bundles
+   show real ZAD jars that are NOT the bundle's contents; three of the four
+   carried the caveat only in alt text, so a sighted reader saw a large photo
+   under a bundle name and read it as that bundle's contents. Uniform, and
+   adds zero page height. .bundle__frame is already relative + overflow:hidden. */
+.bundle--concept .bundle__frame::after{content:"صورة توضيحية";
+  position:absolute;inset-inline-start:10px;bottom:8px;
+  font-size:10.5px;font-weight:700;letter-spacing:.01em;
+  color:rgba(246,242,233,.94);text-shadow:0 1px 8px rgba(0,0,0,.65);
+  pointer-events:none;}
+
+
+/* ── WCAG 2.1 AA — skip link (2.4.1 Bypass Blocks). Non-material: off-canvas
+   until focused, uses only existing tokens, and changes no rendered state.   */
+.skip{position:absolute;right:-9999px;top:0;z-index:200;padding:10px 18px;
+  min-height:var(--tap);border-radius:var(--r-btn);background:var(--green);
+  color:var(--surface);font-family:inherit;font-size:15px;line-height:1.5;
+  text-decoration:none;}
+.skip:focus{right:var(--gutter);top:8px;outline:2px solid var(--green);outline-offset:2px;}

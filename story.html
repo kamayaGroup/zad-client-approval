@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حكاية زاد — زاد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/zad.css">
+
+<!--
+  ZAD — DEEPER STORY DESTINATION: حكاية زاد
+  Tier-2 Internal / Founder Review Artifact (D2c). Not client-facing.
+  Not a Salla/Twilight implementation. Not a Design System update.
+  Revision 9 — Founder grid/rhythm refinement. Records no approval.
+
+  ── REVISION 9 ───────────────────────────────────────────────────────────────
+  This page gains the three CHAPTER ANCHORS the Homepage's clickable branch
+  panels deep-link into: id="ch-ezz", id="ch-majd", id="ch-farah" on the three
+  <article> panels. article[id] inherits scroll-margin-top:var(--anchor-offset)
+  from zad.css §1c, so a landing clears the sticky header by the same measured
+  value the pinned rails use. The panels stay <article> and NOT <a> — this page
+  IS the destination, and linking a panel to itself is a dead affordance.
+  The branch name now sits on the photograph here too, so the shared component
+  does not drift between the two pages; the cap carries no descriptor here
+  because the Founder's verbatim epithet and full body sit directly beneath.
+  This page also RECEIVES the `من المطبخ` block relocated off index.html, word
+  for word, under the Founder's explicit authorization.
+
+  ── APPROVAL STATUS ──────────────────────────────────────────────────────────
+  NOT FOUNDER-REVIEWED. Founder Review of this correction has not happened.
+
+  ── REVISION 8 ───────────────────────────────────────────────────────────────
+  FIX 1  Branch 03 فرح RE-MAPPED from pancakes-candle.jpeg to
+         peanut-butter-counter.jpeg, and the branch group inset from the left
+         (zad.css §15b). Both changes are driven by a repetition defect measured
+         on index.html; they are applied here too because the branch component is
+         shared through assets/zad.css and the two pages must not drift.
+  FIX 2  The archive photograph's hairline moved from `border` to an inset
+         outline (zad.css §15a), so a 1px border can no longer eat the content
+         box and produce a ~1.5% vertical stretch on a photograph of people.
+  The composition itself PASSED and is otherwise untouched: 0/48/96 stagger,
+  anti-card discipline, shared sepia, two-tier name, mobile stack, RTL order.
+
+  ── ROLE OF THIS PAGE ────────────────────────────────────────────────────────
+  The family story lives as a PILLAR SECTION on the Homepage (index.html#story).
+  This page is retained as the DEEPER / FULL story destination reached from that
+  section's CTA, and carries the complete verbatim text including the closing
+  paragraphs the Homepage excerpt does not. Its H1 stays exactly `حكاية زاد`.
+
+  ── NAV / LINK ROUTING, made legible ─────────────────────────────────────────
+    primary nav حكاية زاد -> index.html#story   (the pillar section)
+    footer حكايتنا / المطبخ -> story.html        (purpose is the full story)
+  This page keeps data-page="story", so story shows ACTIVE while this is the
+  dedicated page, with no script involved. The Homepage shows ZERO active nav
+  items AT ITS ROOT — that Founder decision is preserved exactly — and shows
+  exactly ONE active item once it has arrived at a real destination (#week /
+  #season / #bundles / #story), set by the small nav script at the end of
+  index.html through aria-current. Same single treatment either way; see
+  zad.css §2b.
+
+  ── TEXT PROVENANCE — VERBATIM, DO NOT EDIT ──────────────────────────────────
+  Every Arabic sentence here is transcribed verbatim from the Founder-supplied
+  story. Nothing invented, genericised, compressed or added. The em-dash form
+  `زاد — عز` is the Founder's specified form.
+  Authored (structural, not claims): the ordinals 01/02/03; the caption
+  `من أرشيف العائلة` (CD signed off); the archive alt text (applied, awaiting
+  Founder sign-off); and the three branch image alt texts.
+
+  ── BRANCH IMAGERY — genuine ZAD photography only, nothing fabricated ────────
+    01 عز   hand-chili-oil.jpeg         1066x1600
+    02 مجد  compote-spoon.jpeg          1066x1600
+    03 فرح  peanut-butter-counter.jpeg  1066x1600  (re-mapped this revision)
+  PARTIAL SEMANTIC FIT, recorded not hidden: عز is خير البر والبحر — land AND
+  sea. The chili-oil frame carries the land only. NO sea imagery exists anywhere
+  in the ZAD asset set, and none was generated. Ruled ship-it with this note;
+  recorded as a client content gap in the same register as card w3.
+  peanut-butter-shelf.jpeg is BANNED as branch imagery: it is the factually wrong
+  pistachio photograph.
+-->
+</head>
+
+<body data-page="story">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+
+<!-- ── Announcement bar ─────────────────────────────────────────── -->
+<div class="announce" data-salla-setting="batch_open">
+  <span class="announce__dot"></span>
+  <span data-salla-setting="announcement_text">دفعة هذا الأسبوع مفتوحة · تُغلق الخميس ٩م</span>
+  <span class="announce__regions" data-salla-setting="announcement_regions">RIYADH · JEDDAH · DAMMAM</span>
+</div>
+
+<!-- ── Header (shared markup) ───────────────────────────────────── -->
+<header class="hdr">
+  <div class="hdr__in">
+    <a class="hdr__logo" href="index.html" aria-label="زاد — الرئيسية">
+      <img src="_source/photos/brand02.png" alt="زاد">
+    </a>
+
+    <nav class="hdr__nav" aria-label="التنقل الرئيسي">
+      <a data-nav="week"    href="index.html#week">هذا الأسبوع</a>
+      <a data-nav="world"   href="world.html">كل عالم زاد</a>
+      <a data-nav="bundles" href="index.html#bundles">الباقات</a>
+      <a data-nav="season"  href="index.html#season">الموسمي</a>
+      <a data-nav="story"   href="index.html#story" aria-current="true">حكاية زاد</a>
+    </nav>
+
+    <div class="hdr__actions">
+      <a class="hdr__act" href="#" aria-label="البحث">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.2" cy="10.2" r="6.8"/><path d="M15.05 15.05 20.3 20.3"/>
+        </svg>
+      </a>
+      <a class="hdr__act" href="#" aria-label="المفضلة">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 19.9c-1.1-.75-6.9-4.35-6.9-8.85a3.75 3.75 0 0 1 6.9-2.05 3.75 3.75 0 0 1 6.9 2.05c0 4.5-5.8 8.1-6.9 8.85Z"/>
+        </svg>
+      </a>
+      <a class="hdr__act" href="#" aria-label="السلة — ٣ منتجات">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5.7 8.1h12.6l-1 11.15a1.6 1.6 0 0 1-1.6 1.45H8.3a1.6 1.6 0 0 1-1.6-1.45Z"/>
+          <path d="M9.2 8.1V6.55a2.8 2.8 0 0 1 5.6 0V8.1"/>
+        </svg>
+        <span class="hdr__badge" aria-hidden="true">٣</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ══ PAGE HEAD + ORIGIN — ONE SHARED EDITORIAL SPLIT ═════════════════════════
+     Revision 9.1 · D5. Records no approval.
+
+     WHAT WAS WRONG, measured on the rendered pixels: the H1, the standfirst, the
+     archive photograph and the body copy hung off the right edge at four
+     unrelated left positions, with the progression disordered — narrow (H1),
+     widest (standfirst, which had no measure at all and spanned the full 1328),
+     wide (photo, floating at 1384-931=453), medium (body, 62ch at 869). The left
+     third of the page was empty for ~1000px. That matters more now that the
+     Founder's correction moved real weight onto this page, and it was visibly
+     weaker than index.html#story's own composition.
+
+     THE FIX IS AN IMPORT, NOT AN INVENTION. This is the exact composition
+     index.html#story already uses and that revision 9 already proved on this
+     same stylesheet: a rail against the right edge carrying eyebrow -> H1 ->
+     standfirst, and the shared media column carrying the archive band anchored
+     at the content edge with the body copy at the body measure on the photo's
+     own leading edge. No new device, no new class, no new type size.
+
+     WHY .split RATHER THAN ALIGNING THE THREE BLOCKS WHERE THEY STAND — the CD
+     asked for the judgement, so it is recorded. Aligning them in place would
+     have meant authoring three separate offset rules that each re-derive, by
+     hand, edges the shared grid already computes: exactly the per-block
+     sub-width drift that revision 9 Part 3 existed to remove. .split gives the
+     924 media band, the x=56 anchor and the photo-aligned body measure as one
+     relationship rather than three coincidences, and it guarantees the two pages
+     cannot drift apart later. THREE SECTIONS BECOME ONE, which is the real
+     change: the page head, the archival band and the origin prose were three
+     sibling .wrap sections with no relationship expressed between them.
+
+     THE RAIL IS .rail--static. Same reasoning as index.html#story, recorded in
+     zad.css §15a: pinning is a deliberate accent on this site, not the default,
+     and pinning a page's own H1 would make it the default. It is a judgement
+     about intent, not a lack of travel.
+
+     PRESERVED EXACTLY — every word, every attribute, every asset:
+       story_eyebrow · story_title (H1 stays EXACTLY حكاية زاد, matching the nav
+       label) · story_lede · story_image_family + its alt and caption ·
+       story_body_legacy · story_body_continuation. The archive photograph keeps
+       §15a's inset OUTLINE (never a border) and its --archive-max 931px
+       never-upscale ceiling: at 1440 the media column computes to 924, which is
+       0.75% BELOW native, so the intrinsic ratio still governs and the
+       photograph is still never upscaled. That fix MUST survive; do not
+       reintroduce a border here.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="wrap pagehead">
+  <div class="split">
+
+    <!-- RAIL — eyebrow, the page's own H1, and the standfirst, as one block
+         against the right edge. .rail--static: this page's head deliberately
+         does not pin. -->
+    <div class="rail rail--static">
+      <span class="eyebrow eyebrow--ar" data-salla-setting="story_eyebrow">قصة زاد</span>
+      <h1 class="pagehead__h1" data-salla-setting="story_title">حكاية زاد</h1>
+      <p class="pagehead__sub" data-salla-setting="story_lede">بدأت زاد من بيتٍ يعرف قيمة الطعام الحقيقي، ويؤمن أن الجودة ليست تفصيلاً، بل أسلوب حياة.</p>
+    </div>
+
+    <!-- MEDIA — the real archive photograph on the 924 band anchored at the
+         content edge, then the origin prose at the body measure aligned to the
+         photograph's leading edge. Hairline is an inset OUTLINE, never a
+         border: zad.css §15a. -->
+    <div class="story__media">
+
+      <div class="storyband">
+        <figure>
+          <img src="assets/story-family.jpg"
+               alt="جدّ وثلاثة أطفال من أرشيف عائلة زاد"
+               data-salla-setting="story_image_family">
+          <figcaption data-salla-setting="story_image_caption">من أرشيف العائلة</figcaption>
+        </figure>
+      </div>
+
+      <div class="storytext">
+        <p data-salla-setting="story_body_legacy">في عائلتنا، لم يكن العسل مجرد منتج يُباع؛ كان إرثًا بناه والدي، رحمه الله، بمحبةٍ وإتقان، حتى ارتبط اسمه في الطائف بجودة العسل الطبيعي وتنوّع أنواعه. ومنه تعلمنا أن ما يبقى في ذاكرة الناس هو صدق ما نقدّمه، وأن البركة تبدأ من الإحسان في العمل.</p>
+        <p data-salla-setting="story_body_continuation">ومن هذا الإرث وُلد زاد: امتدادًا لتلك القيم، ولكن برؤية جديدة تناسب الحياة اليوم. نقدّم منتجات تُحضر بمكونات طبيعية، بعناية، وبكميات محدودة، لتصل كما لو أنها خرجت للتو من مطبخ المنزل.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ THE THREE BRANCHES — image-led editorial panels ═════════════════════════
+     Revision 9. Records no approval.
+
+     WHAT CHANGED
+     1 · EACH PANEL IS NOW AN ANCHOR TARGET. id="ch-ezz" / "ch-majd" / "ch-farah".
+         These are the real destinations the three whole-panel links on
+         index.html#story point at, which is what makes native browser
+         back/forward work with no script involved. article[id] already picks up
+         scroll-margin-top:var(--anchor-offset) from zad.css §1c, so a landing
+         clears the sticky header by the same value the pinned rails use.
+     2 · THE PANELS STAY <article>, NOT <a>. This page IS the destination;
+         linking a panel to itself would be a dead affordance (zad.css §15b).
+     3 · THE NAME NOW SITS ON THE PHOTOGRAPH, exactly as on index.html — the
+         shared .branch__veil local gradient plus .branch__cap. The external
+         duplicate title is removed here too, so the title lives in exactly one
+         place per panel and the two pages do not drift.
+     4 · THE CAP CARRIES NO .branch__desc ON THIS PAGE. On index.html the short
+         descriptor is the only text a panel gets. Here the Founder's own
+         verbatim epithet and the full body sit directly beneath in
+         .branch__body, so a descriptor above them would be a near-duplicate of
+         the epithet one line away. Same component, one honest omission.
+     5 · The composition itself is untouched and still the one CD passed: no
+         container, no fill, no border, no shadow, no rounded tile; 0/48/96
+         stagger on desktop; stacked one at a time on mobile; RTL order.
+
+     TEXT PROVENANCE — VERBATIM, DO NOT EDIT. Every Arabic sentence in the
+     epithets and bodies below is transcribed verbatim from the Founder-supplied
+     story. The em-dash form `زاد — عز` is the Founder's specified form. Authored
+     (structural, not claims): the 01/02/03 ordinals and the three image alt
+     texts.
+
+     ⚠ OPEN QUESTION, raised this dispatch, NOT acted on: panel 02's alt text
+     reads `ثمرة تين محفوظة` (a preserved fig). Looking at the actual photograph,
+     the fruit on the spoon is a glossy deep-crimson stone fruit that reads far
+     more like a plum or a cherry than a fig, and #season's own copy is about
+     مربّى التين. The alt text is preserved unchanged here because it is recorded
+     rev-8 provenance and correcting it is a content decision for ZAD, not a
+     design fix. Flagged for ZAD to confirm what the fruit actually is.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="wrap sec--tight" id="branches" aria-label="أقسام زاد">
+  <div class="storytext">
+    <p class="storylead" data-salla-setting="story_branches_intro">ولأن زاد يحمل روح العائلة قبل أن يحمل اسمها، قُسّم إلى ثلاثة أقسام، يعكس كلٌ منها شغف أحد أفرادها وتوجهه:</p>
+  </div>
+
+  <div class="branches" data-salla-setting="story_branches">
+
+    <article class="branch branch--1" id="ch-ezz">
+      <figure class="branch__fig">
+        <img class="branch__img" src="_source/photos/hand-chili-oil.jpeg"
+             alt="يد تحمل برطمان زيت الفلفل الحار أمام أرض مفتوحة"
+             data-salla-setting="branch_image">
+        <span class="branch__veil" aria-hidden="true"></span>
+        <span class="branch__cap">
+          <span class="branch__ord mono">01</span>
+          <h2 class="branch__name" data-salla-setting="branch_name"><span class="branch__brand">زاد —</span> عز</h2>
+        </span>
+      </figure>
+      <div class="branch__body">
+        <span class="branch__epithet" data-salla-setting="branch_epithet">خير البر والبحر</span>
+        <p class="branch__text" data-salla-setting="branch_body">ويضم المنتجات التي تحتفي بخيرات الأرض والبحر والنكهات الأصيلة.</p>
+      </div>
+    </article>
+
+    <article class="branch branch--2" id="ch-majd">
+      <figure class="branch__fig">
+        <img class="branch__img" src="_source/photos/compote-spoon.jpeg"
+             alt="ملعقة ترفع ثمرة تين محفوظة من وعاء"
+             data-salla-setting="branch_image">
+        <span class="branch__veil" aria-hidden="true"></span>
+        <span class="branch__cap">
+          <span class="branch__ord mono">02</span>
+          <h2 class="branch__name" data-salla-setting="branch_name"><span class="branch__brand">زاد —</span> مجد</h2>
+        </span>
+      </figure>
+      <div class="branch__body">
+        <span class="branch__epithet" data-salla-setting="branch_epithet">خير المواسم</span>
+        <p class="branch__text" data-salla-setting="branch_body">ويهتم بالمنتجات الموسمية والمحاصيل التي تُقدّم في أفضل وقت لها، محافظة على نكهتها وجودتها.</p>
+      </div>
+    </article>
+
+    <article class="branch branch--3" id="ch-farah">
+      <figure class="branch__fig">
+        <img class="branch__img" src="_source/photos/peanut-butter-counter.jpeg"
+             alt="برطمان زبدة الفول السوداني بالتمر على رخام المطبخ، وخلفه مطبخ بيتي دافئ"
+             data-salla-setting="branch_image">
+        <span class="branch__veil" aria-hidden="true"></span>
+        <span class="branch__cap">
+          <span class="branch__ord mono">03</span>
+          <h2 class="branch__name" data-salla-setting="branch_name"><span class="branch__brand">زاد —</span> فرح</h2>
+        </span>
+      </figure>
+      <div class="branch__body">
+        <span class="branch__epithet" data-salla-setting="branch_epithet">قلب المطبخ</span>
+        <p class="branch__text" data-salla-setting="branch_body">ويضم ما يجعل المطبخ أسهل وأكثر دفئًا. من المنتجات اليومية التي تُعدّ لتختصر الوقت دون أن تتنازل عن الجودة.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ══ من المطبخ — RELOCATED FROM index.html, revision 9 ═══════════════════════
+     This is the `.kitchen` block that revision 8 carried inside index.html's
+     #story pillar. The Founder authorized shortening the Homepage story and
+     relocating previously preserved kitchen/family paragraphs to this page, so
+     the block moves here rather than being deleted. THE COPY IS UNCHANGED,
+     WORD FOR WORD — recovered ZAD wording, `kitchen_eyebrow`, `kitchen_pull`
+     and `kitchen_body` all preserved with their existing data-salla-setting
+     names so nothing has to be re-mapped later.
+
+     PLACEMENT REASONING: it sits AFTER the three branches and BEFORE the closing
+     paragraphs, not between the origin paragraphs and the branches. The origin
+     text ends on `ومن هذا الإرث وُلد زاد` and the branches lead-in opens on
+     `ولأن زاد يحمل روح العائلة...` — those two are a single continuous thought
+     and inserting the kitchen block between them would break it. Placed here,
+     `من المطبخ` reads as how that inheritance is actually practised today, and
+     hands off cleanly to `نؤمن أن الطعام ليس مجرد وجبة`.
+
+     No new section padding class is used: .kitchen already carries its own
+     margin-top:46px + padding-top:36px + top hairline (zad.css §8), which is the
+     rhythm that rule was authored for. It is text-only here for the same reason
+     it was text-only on index.html — its former image (hand-chili-oil.jpeg) is
+     branch panel 01. The teaser survives with its image, unchanged, on
+     world.html.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="wrap" aria-label="من المطبخ">
+  <div class="kitchen">
+    <span class="eyebrow eyebrow--ar" data-salla-setting="kitchen_eyebrow">من المطبخ</span>
+    <p class="story__pull" data-salla-setting="kitchen_pull">نطبخ الزيت على نار هادئة ساعتين، ونتركه يبرد ليلة كاملة قبل التعبئة. ما نستعجل شيء.</p>
+    <p class="story__body" data-salla-setting="kitchen_body">كل ما في زاد يبدأ من مكوّن نعرف مصدره: تمر من نخل العائلة، فلفل من محصول الموسم، وحليب طازج للزبدة. الوصفة قليلة المكوّنات لأن المكوّن نفسه كافٍ.</p>
+  </div>
+</section>
+
+<!-- ══ CLOSING — the full verbatim ending, this page only ══════════ -->
+<section class="wrap sec--tight" aria-label="خاتمة">
+  <div class="storyclose">
+    <p data-salla-setting="story_closing_1">نؤمن أن الطعام ليس مجرد وجبة، بل تجربة تبدأ من اختيار المكونات، وتمر بطريقة التحضير، وتنتهي بلحظة تجمع من نحب حول المائدة.</p>
+    <p data-salla-setting="story_closing_2">زاد… ليس مجرد علامة تجارية، بل امتداد لقصة عائلة. وإرثٍ بدأ بالأب، ويستمر اليوم بشغف الأبناء، ليصل إلى كل بيتٍ يبحث عن غذاءٍ صادق، بسيط، ومليء بالحياة.</p>
+  </div>
+</section>
+
+<!-- ══ ONWARD — heading and CTA as ONE attached block ══════════════════════════
+     Revision 9.1 · D6. Records no approval.
+
+     ⚠ THIS SUPERSEDES A "DO NOT FIX IT" NOTE, and that reversal is recorded
+     rather than quietly applied. The comment that stood here read: "the ← is
+     edge-anchored by the established section-head pattern; CD ruled this correct
+     and NOT a defect. Do not 'fix' it." That ruling was made before the
+     Creative Director had critiqued the RENDERED pixels. Having now done so, the
+     CD has reversed it on this element: at 1440 the heading sat at the far right
+     and كل عالم زاد ← at the far left, ~1240px apart with nothing between them,
+     which reads slack. The new instruction is explicit and supersedes the old
+     note. Anyone reading this later should know the earlier note was not
+     ignored — it was overturned by its own author on better evidence.
+
+     THE FIX IS THE PAIRING THE PAGE ALREADY HAS. .rail rail--static carrying
+     eyebrow -> H2 -> arrowlink is exactly the heading-plus-underlined-CTA block
+     revision 9 already uses in #story, #world and #season. No new device, no new
+     class, no new size. The .week__head flex row is what pushed the two apart
+     via justify-content:space-between, and #week is where that pattern belongs —
+     a section head over a four-column grid, not a two-item outro.
+
+     ONE FURTHER JUDGEMENT, disclosed: the section moves from .sec--tight to
+     .sec--rule. Dropping .week__head also drops its bottom hairline, and this
+     block would otherwise arrive with no transition at all after .storyclose.
+     .sec--rule is the page's OWN existing device (zad.css §16) — the same inset
+     hairline .promises uses — and it puts story.html on the same 88/56 transition
+     rhythm index.html already uses. If that reads as one hairline too many on
+     this page, revert this one token to `sec--tight`; nothing else depends on it.
+
+     COPY UNCHANGED: عالم زاد, كل ما نصنعه, كل عالم زاد, and the world.html
+     destination are all byte-identical.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="wrap sec--rule" aria-label="تابعي">
+  <div class="rail rail--static">
+    <span class="eyebrow eyebrow--ar">عالم زاد</span>
+    <h2 class="h2">كل ما نصنعه</h2>
+    <a class="arrowlink" href="world.html">كل عالم زاد <i>←</i></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ footer (shared markup) ═════════════════════════════════════ -->
+<footer class="ftr">
+  <div class="ftr__in">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <img src="_source/photos/brand02.png" alt="زاد" data-salla-setting="footer_logo">
+        <span class="ftr__blurb" data-salla-setting="footer_blurb">إعادة الطعام إلى أصله · دفعات صغيرة تُحضّر كل جمعة في الرياض.</span>
+      </div>
+      <div class="ftr__cols" data-salla-setting="footer_columns">
+        <div class="ftr__col">
+          <span class="ftr__k mono">SHOP</span>
+          <span class="ftr__h">التسوّق</span>
+          <a href="index.html#week">هذا الأسبوع</a>
+          <a href="world.html">كل عالم زاد</a>
+          <a href="index.html#bundles">الباقات</a>
+          <a href="index.html#season">الموسمي</a>
+        </div>
+        <div class="ftr__col">
+          <span class="ftr__k mono">ZAD</span>
+          <span class="ftr__h">زاد</span>
+          <a href="story.html">حكايتنا</a>
+          <a href="story.html">المطبخ</a>
+          <a href="index.html">الأسئلة</a>
+          <a href="index.html">تواصلي معنا</a>
+        </div>
+        <div class="ftr__col">
+          <span class="ftr__k mono">ORDERS</span>
+          <span class="ftr__h">المساعدة</span>
+          <a href="index.html">التوصيل</a>
+          <a href="index.html">التحضير</a>
+          <a href="index.html">الاستبدال</a>
+          <a href="index.html">الخصوصية</a>
+        </div>
+      </div>
+    </div>
+    <div class="ftr__bot">
+      <span class="ftr__cp" data-salla-setting="footer_copyright">© 2026 ZAD · ALL RIGHTS RESERVED</span>
+      <div class="ftr__by">
+        <span>DESIGNED BY</span>
+        <img src="_source/photos/brand01.svg" alt="KAMAYA">
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
